@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress", "NetPress\NetPress.csproj", "{2412F1E6-6A88-4A8F-A243-B00F4BEFE76E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress", "src\UI\NetPress\NetPress.csproj", "{2412F1E6-6A88-4A8F-A243-B00F4BEFE76E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Domain", "NetPress.Domain\NetPress.Domain.csproj", "{9CB13E69-6844-42A0-A2FE-5BAB4E7D77D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Domain", "src\Core\NetPress.Domain\NetPress.Domain.csproj", "{9CB13E69-6844-42A0-A2FE-5BAB4E7D77D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Application", "NetPress.Application\NetPress.Application.csproj", "{710AB899-70CD-484F-8AFB-2289603EF50D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Application", "src\Core\NetPress.Application\NetPress.Application.csproj", "{710AB899-70CD-484F-8AFB-2289603EF50D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Infrastructure", "NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5D5F36C-8088-459C-A740-22B1267F1C5E}"
 EndProject

@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NetPress.Application\NetPress.Application.csproj" />
-    <ProjectReference Include="..\NetPress.Domain\NetPress.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\NetPress.Application\NetPress.Application.csproj" />
   </ItemGroup>
 
 </Project>
