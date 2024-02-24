@@ -1,6 +1,6 @@
-﻿using NetPress.Application.Repository;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using NetPress.Domain.Repository;
 
 namespace NetPress.Infrastructure.Repository
 {

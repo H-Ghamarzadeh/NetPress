@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetPress.Application\NetPress.Application.csproj" />
+    <ProjectReference Include="..\NetPress.Infrastructure\NetPress.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetPress.Application\NetPress.Application.csproj" />
+    <ProjectReference Include="..\NetPress.Domain\NetPress.Domain.csproj" />
   </ItemGroup>
 
 </Project>
