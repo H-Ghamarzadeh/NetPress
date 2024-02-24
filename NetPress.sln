@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Domain", "src\Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Application", "src\Core\NetPress.Application\NetPress.Application.csproj", "{710AB899-70CD-484F-8AFB-2289603EF50D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Persistence", "src\Infrastructure\NetPress.Persistence\NetPress.Persistence.csproj", "{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5D5F36C-8088-459C-A740-22B1267F1C5E}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1D7D6DDF-0CA7-4E4C-B77E-F2A9F24BDF5A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{865C455A-B294-41CE-9DF4-544C068A1FEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{3B599657-81E3-4C1A-ACED-C5380570E9FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD3109C4-4014-48BD-9CE9-EF7C67BC89DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{F3629817-A5AE-4E01-A7D8-5F9EBC208422} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
 		{1D7D6DDF-0CA7-4E4C-B77E-F2A9F24BDF5A} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
 		{865C455A-B294-41CE-9DF4-544C068A1FEC} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
+		{3B599657-81E3-4C1A-ACED-C5380570E9FD} = {865C455A-B294-41CE-9DF4-544C068A1FEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F61D5248-0D36-4517-BC81-B65A69C561EF}

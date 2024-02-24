@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using NetPress.Application.Contracts.Persistence;
 
-namespace NetPress.Infrastructure.Repository
+namespace NetPress.Persistence.Repository
 {
     public class AsyncRepository<T> : IAsyncRepository<T> where T : class
     {
