@@ -1,42 +1,49 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
 
 namespace NetPress.Persistence.Repository
 {
     public class AsyncRepository<T> : IAsyncRepository<T> where T : class
     {
-        private readonly IMongoCollection<T> _collection;
+        private readonly NetPressDbContext _dbContext;
 
-        public AsyncRepository(IMongoDatabase database, string collectionName)
+        public AsyncRepository(NetPressDbContext dbContext)
         {
-            _collection = database.GetCollection<T>(collectionName);
+            this._dbContext = dbContext;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _collection.Find(new BsonDocument()).ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<T?> GetByIdAsync(Guid id)
         {
-            return await _collection.Find(Builders<T>.Filter.Eq("_id", new ObjectId(id.ToString()))).FirstOrDefaultAsync();
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
         public async Task<T> AddAsync(T entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+
             return entity;
         }
 
         public async Task UpdateAsync(Guid id, T entity)
         {
-            await _collection.ReplaceOneAsync(Builders<T>.Filter.Eq("_id", new ObjectId(id.ToString())), entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            await _collection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", new ObjectId(id.ToString())));
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                _dbContext.Set<T>().Remove(entity);
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

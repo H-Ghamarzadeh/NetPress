@@ -1,20 +1,7 @@
 using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
 using NetPress.Application.Contracts.Persistence;
-using NetPress.Persistence.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// MongoDB configuration
-//var client = new MongoClient("");
-//var database = client.GetDatabase("");
-
-// Register the MongoDB context or direct collections
-//builder.Services.AddSingleton(database);
-
-// Register the generic repository for dependency injection
-// Note: You might need a factory or custom logic to handle collection names for different types
-builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

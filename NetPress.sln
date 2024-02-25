@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1D7D6DDF-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{865C455A-B294-41CE-9DF4-544C068A1FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{3B599657-81E3-4C1A-ACED-C5380570E9FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{3B599657-81E3-4C1A-ACED-C5380570E9FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.API", "src\API\NetPress.API\NetPress.API.csproj", "{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B599657-81E3-4C1A-ACED-C5380570E9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{1D7D6DDF-0CA7-4E4C-B77E-F2A9F24BDF5A} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
 		{865C455A-B294-41CE-9DF4-544C068A1FEC} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
 		{3B599657-81E3-4C1A-ACED-C5380570E9FD} = {865C455A-B294-41CE-9DF4-544C068A1FEC}
+		{2783E02D-1197-42CA-8E31-D44A8C0EC0C5} = {F3629817-A5AE-4E01-A7D8-5F9EBC208422}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F61D5248-0D36-4517-BC81-B65A69C561EF}
