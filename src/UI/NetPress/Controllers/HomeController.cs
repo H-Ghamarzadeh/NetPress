@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetPress.Application.Contracts.Persistence;
 using NetPress.Models;
 using System.Diagnostics;
 
@@ -7,15 +8,17 @@ namespace NetPress.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPostRepository postRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IPostRepository postRepository)
         {
             _logger = logger;
+            this.postRepository = postRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await postRepository.GetAllAsync());
         }
 
         public IActionResult Privacy()
