@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace NetPress.Application.Features.Post.Queries.GetPostsList
 {
-    public class GetPostsListQueryHandler : IRequestHandler<GetPostsListQuery, List<NetPress.Domain.Entities.Post>>
+    public class GetPostsListHandler : IRequestHandler<GetPostsList, IEnumerable<NetPress.Domain.Entities.Post>>
     {
         private readonly IPostRepository postRepository;
 
-        public GetPostsListQueryHandler(IPostRepository postRepository)
+        public GetPostsListHandler(IPostRepository postRepository)
         {
             this.postRepository = postRepository;
         }
         public int Priority => 0;
 
-        public async Task<List<NetPress.Domain.Entities.Post>> Handle(GetPostsListQuery request)
+        public async Task<IEnumerable<NetPress.Domain.Entities.Post>> Handle(GetPostsList request)
         {
-            return (await postRepository.GetAllAsync()).ToList();
+            return await postRepository.GetAllAsync();
         }
     }
 }

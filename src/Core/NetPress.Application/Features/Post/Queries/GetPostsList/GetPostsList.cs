@@ -3,7 +3,7 @@ using NetPress.Domain.Entities;
 
 namespace NetPress.Application.Features.Post.Queries.GetPostsList
 {
-    public class GetPostsListQuery:IRequest<List<NetPress.Domain.Entities.Post>>
+    public class GetPostsList:IRequest<IEnumerable<NetPress.Domain.Entities.Post>>
     {
     }
 }

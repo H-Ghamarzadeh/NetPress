@@ -11,17 +11,15 @@ namespace NetPress.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHub hub;
 
-        public HomeController(ILogger<HomeController> logger, IHub hub)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            this.hub = hub;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await hub.RequestAsync<List<Post>>(new GetPostsListQuery()));
+            return View();
         }
 
         public IActionResult Privacy()

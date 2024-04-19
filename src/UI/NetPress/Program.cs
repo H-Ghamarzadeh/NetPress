@@ -1,4 +1,5 @@
 using HGO.Hub;
+using HGO.Hub.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using NetPress.Application.Contracts.Persistence;
 using NetPress.Persistence;
@@ -16,6 +17,10 @@ builder.Services.AddHgoHub(configuration =>
     configuration.RegisterServicesFromAssemblyContaining<IPostRepository>(); //Register NetPress.Application Assembly
 });
 builder.Services.AddNetPressPersistenceServices(builder.Configuration);
+
+//Will be removed - for change Hub Service LifeTime
+builder.Services.Remove(builder.Services.FirstOrDefault(p => p.ImplementationType == typeof(Hub)));
+builder.Services.AddScoped<IHub, Hub>();
 
 var app = builder.Build();
 
