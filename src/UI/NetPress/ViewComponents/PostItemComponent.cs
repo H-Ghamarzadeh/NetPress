@@ -7,21 +7,19 @@ using NetPress.Domain.Entities;
 
 namespace NetPress.ViewComponents
 {
-    public class PostsListComponent(IHub hub) : ViewComponent
+    public class PostItemComponent(IHub hub) : ViewComponent
     {
-        public IViewComponentResult Invoke(List<Post>? posts)
+        public IViewComponentResult Invoke(Post post)
         {
-            if (posts == null) return Content("");
-
-            return View(model: posts);
+            return View(model: post);
         }
     }
 
 
-    [HtmlTargetElement("PostsList")]
-    public class PostsListTagHelper(IViewComponentHelper viewComponentHelper) : TagHelper
+    [HtmlTargetElement("PostItem")]
+    public class PostItemTagHelper(IViewComponentHelper viewComponentHelper) : TagHelper
     {
-        public List<Post> Posts { get; set; }
+        public Post Post { get; set; }
         
         [HtmlAttributeNotBound]
         [ViewContext]
@@ -30,7 +28,7 @@ namespace NetPress.ViewComponents
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             ((IViewContextAware)viewComponentHelper).Contextualize(ViewContext);
-            var content = await viewComponentHelper.InvokeAsync("PostsListComponent", new { posts = Posts });
+            var content = await viewComponentHelper.InvokeAsync("PostItemComponent", new { post = Post });
             output.Content.SetHtmlContent(content);
         }
     }

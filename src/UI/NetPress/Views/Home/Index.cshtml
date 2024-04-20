@@ -1,4 +1,7 @@
-﻿@{
+﻿@using HGO.Hub.Interfaces
+@using NetPress.Application.Features.Post.Queries.GetPostsList
+@inject IHub hub
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,5 +9,5 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <PostsList param="Hello from Tag Helper by Hadi Ghamarzadeh!"></PostsList>
+    <PostsList posts="@await hub.RequestAsync(new GetPostsList())"></PostsList>
 </div>

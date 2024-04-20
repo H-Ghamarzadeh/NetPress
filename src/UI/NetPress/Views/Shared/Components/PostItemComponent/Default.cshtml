@@ -3,11 +3,10 @@
 *@
 @{
 }
-@model List<NetPress.Domain.Entities.Post>
+@model NetPress.Domain.Entities.Post
 
 <div>
-    @foreach (var post in Model)
-    {
-        <PostItem post="post"></PostItem>
-    }
+    <p>
+        @Model.Title
+    </p>
 </div>
