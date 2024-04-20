@@ -12,17 +12,21 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHgoHub(configuration =>
 {
+    configuration.HubServiceLifetime = ServiceLifetime.Scoped;
     configuration.HandlersDefaultLifetime = ServiceLifetime.Scoped;
     configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); //Register NetPress Assembly
     configuration.RegisterServicesFromAssemblyContaining<IPostRepository>(); //Register NetPress.Application Assembly
 });
+
 builder.Services.AddNetPressPersistenceServices(builder.Configuration);
 
-//Will be removed - for change Hub Service LifeTime
-builder.Services.Remove(builder.Services.FirstOrDefault(p => p.ImplementationType == typeof(Hub)));
-builder.Services.AddScoped<IHub, Hub>();
-
 var app = builder.Build();
+
+//Generate Fake Data for DataBase
+using (var scope = app.Services.CreateScope())
+{
+    SeedData.Seed(scope.ServiceProvider.GetRequiredService<NetPressDbContext>());
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

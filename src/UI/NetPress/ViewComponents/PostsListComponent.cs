@@ -12,7 +12,7 @@ namespace NetPress.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string param)
         {
             var model = await hub.RequestAsync(new GetPostsList());
-            return View(model:param);
+            return View(model: model.ToList());
         }
     }
 

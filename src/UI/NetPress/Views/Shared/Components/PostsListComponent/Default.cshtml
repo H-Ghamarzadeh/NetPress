@@ -3,8 +3,13 @@
 *@
 @{
 }
-@model string
+@model List<NetPress.Domain.Entities.Post>
 
 <div>
-    @Model
+    @foreach (var post in Model)
+    {
+        <p>
+            @post.Title
+        </p>
+    }
 </div>
