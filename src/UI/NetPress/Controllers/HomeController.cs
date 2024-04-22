@@ -4,17 +4,11 @@ using System.Diagnostics;
 
 namespace NetPress.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            logger.Log(LogLevel.Trace, "Loading Home Page");
             return View();
         }
 
