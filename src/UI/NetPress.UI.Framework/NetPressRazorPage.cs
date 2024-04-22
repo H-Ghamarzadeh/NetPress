@@ -1,8 +1,11 @@
 ﻿using System.Text.Encodings.Web;
 using HGO.Hub.Interfaces;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
+using Microsoft.Extensions.Primitives;
+using NetPress.UI.Framework.ExtensionMethods.Common;
 
 namespace NetPress.UI.Framework
 {
@@ -17,7 +20,7 @@ namespace NetPress.UI.Framework
         /// <summary>
         /// Render a View Component Asynchronously
         /// </summary>
-        public ViewComponentAsyncRenderer VA
+        public ViewComponentAsyncRenderer VCAsync
         {
             get
             {
@@ -45,7 +48,7 @@ namespace NetPress.UI.Framework
         /// <summary>
         /// Render a View Component Synchronously
         /// </summary>
-        public ViewComponentRenderer V => _componentRenderer ??= (name, args) => VA(name, args).Result;
+        public ViewComponentRenderer VC => _componentRenderer ??= (name, args) => VCAsync(name, args).Result;
 
         /// <summary>
         /// Access to Hub (for publish events, requests, ...)
@@ -53,13 +56,23 @@ namespace NetPress.UI.Framework
         public IHub Hub => ViewContext.HttpContext.RequestServices.GetRequiredService<IHub>();
 
         /// <summary>
-        /// Get current http request query strings
+        /// Get value of the specified key from the current http request query strings and convert it to typeof(T)
         /// </summary>
-        public IQueryCollection QS => ViewContext.HttpContext.Request.Query;
+        public T Query<T>(string key, T defaultValue = default(T)) => ViewContext.HttpContext.Request.Query[key].ToString().To<T>(defaultValue);
 
         /// <summary>
-        /// Get current http request form data
+        /// Get value of the specified key from the current http request query strings as string
         /// </summary>
-        public IFormCollection F => ViewContext.HttpContext.Request.Form;
+        public string Query(string key) => Query(key, "");
+
+        /// <summary>
+        /// Get value of the specified key from the current http request form data and convert it to typeof(T)
+        /// </summary>
+        public T Form<T>(string key, T defaultValue = default(T)) => ViewContext.HttpContext.Request.Form[key].ToString().To<T>(defaultValue);
+
+        /// <summary>
+        /// Get value of the specified key from the current http request form data as string
+        /// </summary>
+        public string Form(string key) => Form(key, "");
     }
 }

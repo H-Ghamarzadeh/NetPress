@@ -5,6 +5,5 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    @V("PostsListComponent", new { posts = await Hub.RequestAsync(new GetPostsListQuery() { PageSize = QS["PageSize"].To(10), PageIndex = QS["PageIndex"].To(0) }) })
+    @VC("PostsListComponent", new { posts = await Hub.RequestAsync(new GetPostsListQuery() { PageSize = Query("PageSize",10), PageIndex = Query("PageIndex",0) }) })
 </div>
