@@ -1,8 +1,4 @@
-﻿using HGO.Hub.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using NetPress.Application.Contracts.Persistence;
-using NetPress.Application.Features.Post.Queries.GetPostsList;
-using NetPress.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using NetPress.Models;
 using System.Diagnostics;
 

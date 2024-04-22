@@ -1,6 +1,4 @@
 using HGO.Hub;
-using HGO.Hub.Interfaces;
-using Microsoft.AspNetCore.Hosting;
 using NetPress.Application.Contracts.Persistence;
 using NetPress.Persistence;
 using System.Reflection;

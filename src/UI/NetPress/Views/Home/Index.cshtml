@@ -1,7 +1,4 @@
-﻿@using HGO.Hub.Interfaces
-@using NetPress.Application.Features.Post.Queries.GetPostsList
-@inject IHub hub
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -9,5 +6,5 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <PostsList posts="@await hub.RequestAsync(new GetPostsList())"></PostsList>
+    @await V("PostsListComponent", new { posts = await Hub.RequestAsync(new GetPostsListQuery()) })
 </div>

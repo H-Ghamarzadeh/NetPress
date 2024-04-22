@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetPress.Application.Contracts.Persistence
+﻿namespace NetPress.Application.Contracts.Persistence
 {
     public interface IAsyncRepository<T> where T : class
     {

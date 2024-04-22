@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\NetPress.Application\NetPress.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NetPress.Persistence\NetPress.Persistence.csproj" />
+    <ProjectReference Include="..\NetPress.UI.Framework\NetPress.UI.Framework.csproj" />
   </ItemGroup>
 
 </Project>

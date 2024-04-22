@@ -25,13 +25,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Infrastructure", "src\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj", "{3B599657-81E3-4C1A-ACED-C5380570E9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.API", "src\API\NetPress.API\NetPress.API.csproj", "{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.API", "src\API\NetPress.API\NetPress.API.csproj", "{2783E02D-1197-42CA-8E31-D44A8C0EC0C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.Application.UnitTests", "test\NetPress.Application.UnitTests\NetPress.Application.UnitTests.csproj", "{953775B0-1D3E-4966-B861-674AA96AE5BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Application.UnitTests", "test\NetPress.Application.UnitTests\NetPress.Application.UnitTests.csproj", "{953775B0-1D3E-4966-B861-674AA96AE5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.Persistence.IntegrationTest", "test\NetPress.Persistence.IntegrationTest\NetPress.Persistence.IntegrationTest.csproj", "{02719246-1164-479B-8A79-56C2BEECA1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Persistence.IntegrationTest", "test\NetPress.Persistence.IntegrationTest\NetPress.Persistence.IntegrationTest.csproj", "{02719246-1164-479B-8A79-56C2BEECA1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.API.IntegrationTest", "test\NetPress.API.IntegrationTest\NetPress.API.IntegrationTest.csproj", "{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.API.IntegrationTest", "test\NetPress.API.IntegrationTest\NetPress.API.IntegrationTest.csproj", "{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.UI.Framework", "src\UI\NetPress.UI.Framework\NetPress.UI.Framework.csproj", "{7BC19354-DDEF-4758-8D66-51155BCA98EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC19354-DDEF-4758-8D66-51155BCA98EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC19354-DDEF-4758-8D66-51155BCA98EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC19354-DDEF-4758-8D66-51155BCA98EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC19354-DDEF-4758-8D66-51155BCA98EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{953775B0-1D3E-4966-B861-674AA96AE5BE} = {2D4D6122-BBEF-4CAB-8C5F-BB339763EC09}
 		{02719246-1164-479B-8A79-56C2BEECA1E9} = {2D4D6122-BBEF-4CAB-8C5F-BB339763EC09}
 		{08C27BA1-C4E5-4BF2-B870-D5C816A344CA} = {2D4D6122-BBEF-4CAB-8C5F-BB339763EC09}
+		{7BC19354-DDEF-4758-8D66-51155BCA98EB} = {32B6FE95-3F00-4AF7-9543-4F6B292FF250}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F61D5248-0D36-4517-BC81-B65A69C561EF}
