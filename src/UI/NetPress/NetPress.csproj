@@ -20,4 +20,12 @@
     <ProjectReference Include="..\NetPress.UI.Framework\NetPress.UI.Framework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Components\HomePageLatestPostsComponent\Default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\HomePageLatestPostsComponent\Default.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -5,5 +5,5 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @VC("PostsListComponent", new { posts = await Hub.RequestAsync(new GetPostsListQuery() { PageSize = Query("PageSize",10), PageIndex = Query("PageIndex",0) }) })
+    @VC("HomePageLatestPostsComponent")
 </div>

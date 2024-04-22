@@ -11,8 +11,8 @@ namespace NetPress.UI.Framework
 {
     public abstract class NetPressRazorPage<TModel> : Microsoft.AspNetCore.Mvc.Razor.RazorPage<TModel>
     {
-        public delegate Task<HtmlString> ViewComponentAsyncRenderer(string name, object? args);
-        public delegate HtmlString ViewComponentRenderer(string name, object? args);
+        public delegate Task<HtmlString> ViewComponentAsyncRenderer(string name, object? args = default);
+        public delegate HtmlString ViewComponentRenderer(string name, object? args = default);
 
         private ViewComponentAsyncRenderer? _componentAsyncRenderer;
         private ViewComponentRenderer? _componentRenderer;

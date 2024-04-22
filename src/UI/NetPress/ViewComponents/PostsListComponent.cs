@@ -1,5 +1,4 @@
-﻿using HGO.Hub.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NetPress.Domain.Entities;
 
 namespace NetPress.ViewComponents
