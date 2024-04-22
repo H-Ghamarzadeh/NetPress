@@ -12,6 +12,7 @@ namespace NetPress.Controllers
             return View();
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = Int32.MaxValue)]
         public IActionResult Privacy()
         {
             return View();

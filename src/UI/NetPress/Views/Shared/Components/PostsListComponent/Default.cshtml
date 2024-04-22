@@ -3,6 +3,6 @@
 <div>
     @foreach (var post in Model)
     {
-        @await V("PostItemComponent", new { post })
+        @V("PostItemComponent", new { post })
     }
 </div>

@@ -18,6 +18,12 @@ builder.Services.AddHgoHub(configuration =>
 
 builder.Services.AddNetPressPersistenceServices(builder.Configuration);
 
+// generate lowercase URLs
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
+
 var app = builder.Build();
 
 //Generate Fake Data for DataBase

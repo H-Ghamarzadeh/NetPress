@@ -8,15 +8,20 @@ namespace NetPress.UI.Framework
 {
     public abstract class NetPressRazorPage<TModel> : Microsoft.AspNetCore.Mvc.Razor.RazorPage<TModel>
     {
-        public delegate Task<HtmlString> ViewComponentRenderer(string name, object? args);
+        public delegate Task<HtmlString> ViewComponentAsyncRenderer(string name, object? args);
+        public delegate HtmlString ViewComponentRenderer(string name, object? args);
 
+        private ViewComponentAsyncRenderer? _componentAsyncRenderer;
         private ViewComponentRenderer? _componentRenderer;
 
-        public ViewComponentRenderer V
+        /// <summary>
+        /// Render a View Component Asynchronously
+        /// </summary>
+        public ViewComponentAsyncRenderer VA
         {
             get
             {
-                _componentRenderer ??= async (name, args) =>
+                _componentAsyncRenderer ??= async (name, args) =>
                 {
                     var service = ViewContext.HttpContext.RequestServices;
                     var helper = new DefaultViewComponentHelper(
@@ -33,16 +38,28 @@ namespace NetPress.UI.Framework
                     await writer.FlushAsync();
                     return new HtmlString(writer.ToString());
                 };
-                return _componentRenderer;
+                return _componentAsyncRenderer;
             }
         }
 
-        public IHub Hub
-        {
-            get
-            {
-                return ViewContext.HttpContext.RequestServices.GetRequiredService<IHub>();
-            }
-        }
+        /// <summary>
+        /// Render a View Component Synchronously
+        /// </summary>
+        public ViewComponentRenderer V => _componentRenderer ??= (name, args) => VA(name, args).Result;
+
+        /// <summary>
+        /// Access to Hub (for publish events, requests, ...)
+        /// </summary>
+        public IHub Hub => ViewContext.HttpContext.RequestServices.GetRequiredService<IHub>();
+
+        /// <summary>
+        /// Get current http request query strings
+        /// </summary>
+        public IQueryCollection QS => ViewContext.HttpContext.Request.Query;
+
+        /// <summary>
+        /// Get current http request form data
+        /// </summary>
+        public IFormCollection F => ViewContext.HttpContext.Request.Form;
     }
 }
