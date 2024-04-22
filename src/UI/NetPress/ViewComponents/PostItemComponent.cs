@@ -4,7 +4,7 @@ using NetPress.Domain.Entities;
 
 namespace NetPress.ViewComponents
 {
-    public class PostItemComponent(IHub hub) : ViewComponent
+    public class PostItemComponent : ViewComponent
     {
         public IViewComponentResult Invoke(Post post)
         {
