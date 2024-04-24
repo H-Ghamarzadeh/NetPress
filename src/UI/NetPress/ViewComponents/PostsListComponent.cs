@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using NetPress.Domain.Entities;
 
 namespace NetPress.ViewComponents
@@ -7,7 +8,7 @@ namespace NetPress.ViewComponents
     {
         public IViewComponentResult Invoke(List<Post>? posts)
         {
-            if (posts == null) return Content("");
+            if (posts == null) Content("");
 
             return View(model: posts);
         }

@@ -26,20 +26,20 @@ namespace NetPress.UI.Framework
             {
                 _componentAsyncRenderer ??= async (name, args) =>
                 {
-                    var service = ViewContext.HttpContext.RequestServices;
-                    var helper = new DefaultViewComponentHelper(
-                        service.GetRequiredService<IViewComponentDescriptorCollectionProvider>(),
+                    var serviceProvider = ViewContext.HttpContext.RequestServices;
+                    var viewComponentHelper = new DefaultViewComponentHelper(
+                        serviceProvider.GetRequiredService<IViewComponentDescriptorCollectionProvider>(),
                         HtmlEncoder.Default,
-                        service.GetRequiredService<IViewComponentSelector>(),
-                        service.GetRequiredService<IViewComponentInvokerFactory>(),
-                        service.GetRequiredService<IViewBufferScope>());
+                        serviceProvider.GetRequiredService<IViewComponentSelector>(),
+                        serviceProvider.GetRequiredService<IViewComponentInvokerFactory>(),
+                        serviceProvider.GetRequiredService<IViewBufferScope>());
 
-                    await using var writer = new StringWriter();
-                    helper.Contextualize(ViewContext);
-                    var result = await helper.InvokeAsync(name, args);
-                    result.WriteTo(writer, HtmlEncoder.Default);
-                    await writer.FlushAsync();
-                    return new HtmlString(writer.ToString());
+                    await using var stringWriter = new StringWriter();
+                    viewComponentHelper.Contextualize(ViewContext);
+                    var result = await viewComponentHelper.InvokeAsync(name, args);
+                    result.WriteTo(stringWriter, HtmlEncoder.Default);
+                    await stringWriter.FlushAsync();
+                    return new HtmlString(stringWriter.ToString());
                 };
                 return _componentAsyncRenderer;
             }

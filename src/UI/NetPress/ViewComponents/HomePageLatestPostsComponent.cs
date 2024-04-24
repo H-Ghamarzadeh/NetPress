@@ -6,9 +6,9 @@ namespace NetPress.ViewComponents;
 
 public class HomePageLatestPostsComponent(IHub hub) : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync([FromQuery] int? pageIndex)
+    public async Task<IViewComponentResult> InvokeAsync(int? pageSize)
     {
-        var model = await hub.RequestAsync(new GetPostsListQuery() { PageSize = 20, PageIndex = pageIndex ?? 0 });
+        var model = await hub.RequestAsync(new GetPostsListQuery() { PageSize = pageSize ?? 8, PageIndex = 0 });
         return View(model: model);
     }
 }
