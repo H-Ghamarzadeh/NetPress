@@ -26,12 +26,6 @@ builder.Services.Configure<RouteOptions>(options =>
 
 var app = builder.Build();
 
-//Generate Fake Data for DataBase
-using (var scope = app.Services.CreateScope())
-{
-    SeedData.Seed(scope.ServiceProvider.GetRequiredService<NetPressDbContext>());
-}
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -50,5 +44,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//Generate Fake Data for DataBase
+DbInitializer.Seed(app);
 
 app.Run();
