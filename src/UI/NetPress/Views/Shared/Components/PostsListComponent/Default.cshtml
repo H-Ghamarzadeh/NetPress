@@ -3,6 +3,6 @@
 <div>
     @foreach (var post in Model)
     {
-        @VC("PostItemComponent", new { post })
+        <partial name="_PostCard" model="post"/>
     }
 </div>

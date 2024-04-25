@@ -1,16 +1,15 @@
 ﻿using System.Text.Encodings.Web;
 using HGO.Hub.Interfaces;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
-using Microsoft.Extensions.Primitives;
 using NetPress.UI.Framework.ExtensionMethods.Common;
 
 namespace NetPress.UI.Framework
 {
     public abstract class NetPressRazorPage<TModel> : Microsoft.AspNetCore.Mvc.Razor.RazorPage<TModel>
     {
+        /*
         public delegate Task<HtmlString> ViewComponentAsyncRenderer(string name, object? args = default);
         public delegate HtmlString ViewComponentRenderer(string name, object? args = default);
 
@@ -49,6 +48,7 @@ namespace NetPress.UI.Framework
         /// Render a View Component Synchronously
         /// </summary>
         public ViewComponentRenderer VC => _componentRenderer ??= (name, args) => VCAsync(name, args).Result;
+        */
 
         /// <summary>
         /// Access to Hub (for publish events, requests, ...)
