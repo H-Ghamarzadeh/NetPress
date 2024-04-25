@@ -7,6 +7,8 @@ using NetPress.Application.Actions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var assemblies = GetAssembliesToRegister();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -14,9 +16,7 @@ builder.Services.AddHgoHub(configuration =>
 {
     configuration.HubServiceLifetime = ServiceLifetime.Scoped;
     configuration.HandlersDefaultLifetime = ServiceLifetime.Scoped;
-    configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); //Register NetPress Assembly
-    configuration.RegisterServicesFromAssemblyContaining<IPostRepository>(); //Register NetPress.Application Assembly
-    configuration.RegisterServicesFromAssemblyContaining<NetPressDbContext>(); //Register NetPress.Application Assembly
+    configuration.RegisterServicesFromAssemblies(assemblies.ToArray());
 });
 
 builder.Services.AddNetPressPersistenceServices(builder.Configuration);
@@ -58,3 +58,17 @@ app.Run();
 
 //Do all registered actions after run the application
 app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterAppRunAction(app));
+
+
+//Get all assemblies to register in the application
+List<Assembly> GetAssembliesToRegister()
+{
+    var result = new List<Assembly>
+    {
+        Assembly.GetExecutingAssembly(), //Register NetPress Assembly
+        typeof(IPostRepository).Assembly, //Register NetPress.Application Assembly
+        typeof(NetPressDbContext).Assembly //Register NetPress.Application Assembly
+    };
+
+    return result;
+}

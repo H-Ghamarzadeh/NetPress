@@ -6,10 +6,17 @@ namespace NetPress.Controllers
 {
     public class BlogController(IHub hub) : Controller
     {
-        [Route("blog/{page?}")]
-        public async Task<IActionResult> Index(int? page, int?pageSize)
+        [Route("blog/{page:int?}")]
+        public async Task<IActionResult> Index(int? page, int? pageSize)
         {
+            if (page <= 0 || pageSize <= 0 || pageSize > 500 )
+            {
+                RouteData.Values.Clear();
+                return RedirectToAction("Index", "Blog");
+            }
+
             var model = await hub.RequestAsync(new GetPostsListQuery() { PageIndex = page , PageSize = pageSize});
+
             return View(model);
         }
 
@@ -17,12 +24,16 @@ namespace NetPress.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                RouteData.Values.Clear();
+                return RedirectToAction("Index", "Blog");
             }
+
             var model = await hub.RequestAsync(new GetPostDetailsQuery() { PostId = id.Value });
+
             if (model == null)
             {
-                return NotFound();
+                RouteData.Values.Clear();
+                return RedirectToAction("Index", "Blog");
             }
 
             return View(model);
