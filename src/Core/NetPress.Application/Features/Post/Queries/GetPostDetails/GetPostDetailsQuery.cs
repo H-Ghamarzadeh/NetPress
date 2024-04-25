@@ -1,6 +1,6 @@
 ﻿using HGO.Hub.Interfaces.Requests;
-using System.Linq.Expressions;
 
+// ReSharper disable once CheckNamespace
 namespace NetPress.Application.Features
 {
     public class GetPostDetailsQuery : IRequest<Domain.Entities.Post>
