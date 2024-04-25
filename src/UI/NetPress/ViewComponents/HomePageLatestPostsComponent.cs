@@ -8,7 +8,7 @@ public class HomePageLatestPostsComponent(IHub hub) : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync(int? pageSize)
     {
-        var model = await hub.RequestAsync(new GetPostsListQuery() { PageSize = pageSize ?? 8, PageIndex = 0 });
+        var model = await hub.RequestAsync(new GetPostsListQuery() { PageSize = pageSize ?? 8});
         return View(model: model);
     }
 }

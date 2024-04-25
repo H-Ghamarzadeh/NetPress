@@ -1,19 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
+using System.Security.Cryptography;
+using NetPress.Domain.Common;
+using System.Linq.Expressions;
 
 namespace NetPress.Persistence.Repository
 {
     public class AsyncRepository<T>(NetPressDbContext dbContext) : IAsyncRepository<T>
-        where T : class
+        where T : BaseEntity
     {
         public async Task<List<T>> GetAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[]? includes)
         {
-            return await dbContext.Set<T>().FindAsync(id);
+            IQueryable<T> query = dbContext.Set<T>();
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return await query.FirstOrDefaultAsync(p=> p.Id == id);
         }
 
         public async Task<T> AddAsync(T entity)
@@ -24,13 +35,13 @@ namespace NetPress.Persistence.Repository
             return entity;
         }
 
-        public async Task UpdateAsync(Guid id, T entity)
+        public async Task UpdateAsync(int id, T entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
             if (entity != null)

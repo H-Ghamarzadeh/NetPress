@@ -12,8 +12,22 @@ namespace NetPress.Application.Features.Post.Queries.GetPostsList
 
         public async Task<List<Domain.Entities.Post>> Handle(GetPostsListQuery request)
         {
+            var pageSize = request.PageSize ?? 16;
+            if (pageSize <= 0)
+            {
+                pageSize = 1;
+            }
+
+            var pageIndex = request.PageIndex ?? 1;
+            if (pageIndex <= 0)
+            {
+                pageIndex = 1;
+            }
+            pageIndex--;
+
+
             return await repository.GetAsQueryable().OrderByDescending(p => p.LastModifiedDate)
-                .ThenByDescending(p => p.CreatedDate).Skip(request.PageSize * request.PageIndex).Take(request.PageSize)
+                .ThenByDescending(p => p.CreatedDate).Skip(pageSize * pageIndex).Take(pageSize)
                 .ToListAsync();
         }
     }
