@@ -12,7 +12,15 @@ namespace NetPress.Persistence
         {
             services.AddDbContext<NetPressDbContext>(cfg =>
             {
-                cfg.UseSqlServer(configurationManager.GetConnectionString("DefaultConnection"));
+                switch (configurationManager["DataBase:Technology"]?.Trim().ToLower())
+                {
+                    case "sqlite":
+                        cfg.UseSqlite(configurationManager["DataBase:ConnectionString"]);
+                        break;
+                    default:
+                        cfg.UseSqlServer(configurationManager["DataBase:ConnectionString"]);
+                        break;
+                }
             });
 
             services.AddScoped<IPostRepository, PostRepository>();

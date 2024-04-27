@@ -30,7 +30,7 @@ builder.Services.Configure<RouteOptions>(options =>
 var app = builder.Build();
 
 //Do all registered actions after build the application
-app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterBuildApplicationAction(app));
+await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterBuildApplicationAction(app));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -44,6 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAntiforgery();
 
 app.UseAuthorization();
 
@@ -52,12 +53,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //Do all registered actions before run the application (e.g.: DbInitializer)
-app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new BeforeAppRunAction(app));
+await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new BeforeAppRunAction(app));
 
 app.Run();
 
 //Do all registered actions after run the application
-app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterAppRunAction(app));
+await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterAppRunAction(app));
 
 
 //Get all assemblies to register in the application
