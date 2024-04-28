@@ -11,4 +11,8 @@
 		<PackageReference Include="HGO.Hub" Version="1.0.5" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\NetPress.Application\NetPress.Application.csproj" />
+	</ItemGroup>
+
 </Project>

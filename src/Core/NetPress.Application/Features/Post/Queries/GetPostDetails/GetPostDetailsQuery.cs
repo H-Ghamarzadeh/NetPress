@@ -3,8 +3,8 @@
 // ReSharper disable once CheckNamespace
 namespace NetPress.Application.Features
 {
-    public class GetPostDetailsQuery : IRequest<Domain.Entities.Post>
+    public class GetPostDetailsQuery(int postId) : IRequest<Domain.Entities.Post>
     {
-        public int PostId { get; set; }
+        public int PostId { get; } = postId;
     }
 }

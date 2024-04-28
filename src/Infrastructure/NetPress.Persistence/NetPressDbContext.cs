@@ -12,9 +12,6 @@ namespace NetPress.Persistence
         {
         }
 
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Category> Categories { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(NetPressDbContext).Assembly);
@@ -28,6 +25,7 @@ namespace NetPress.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.LastModifiedDate = DateTime.Now;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
@@ -36,5 +34,11 @@ namespace NetPress.Persistence
             }
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostPicture> PostPictures { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryPicture> CategoryPictures { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
     }
 }

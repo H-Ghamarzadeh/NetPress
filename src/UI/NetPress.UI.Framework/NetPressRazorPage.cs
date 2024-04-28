@@ -1,9 +1,5 @@
-﻿using System.Text.Encodings.Web;
-using HGO.Hub.Interfaces;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
-using NetPress.UI.Framework.ExtensionMethods.Common;
+﻿using HGO.Hub.Interfaces;
+using NetPress.Application.ExtensionMethods.Common;
 
 namespace NetPress.UI.Framework
 {

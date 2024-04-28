@@ -15,7 +15,7 @@ namespace NetPress.Controllers
                 return RedirectToAction("Index", "Blog");
             }
 
-            var model = await hub.RequestAsync(new GetPostsListQuery() { PageIndex = page , PageSize = pageSize});
+            var model = await hub.RequestAsync(new GetLatestPostsListQuery("post", pageSize, page));
 
             return View(model);
         }
@@ -28,7 +28,7 @@ namespace NetPress.Controllers
                 return RedirectToAction("Index", "Blog");
             }
 
-            var model = await hub.RequestAsync(new GetPostDetailsQuery() { PostId = id.Value });
+            var model = await hub.RequestAsync(new GetPostDetailsQuery(id.Value));
 
             if (model == null)
             {

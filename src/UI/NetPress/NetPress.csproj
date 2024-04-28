@@ -21,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Shared\Components\HomePageLatestPostsComponent\Default.cshtml" />
+    <UpToDateCheckInput Remove="Views\Shared\Components\LatestPostsComponent\Default.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Shared\Components\HomePageLatestPostsComponent\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\LatestPostsComponent\Default.cshtml" />
   </ItemGroup>
 
 </Project>
