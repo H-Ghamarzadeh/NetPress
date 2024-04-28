@@ -5,7 +5,7 @@ namespace NetPress.Application.Contracts.Persistence
 {
     public interface IAsyncRepository<T> where T : BaseEntity
     {
-        Task<List<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[]? includes);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(int id, T entity);

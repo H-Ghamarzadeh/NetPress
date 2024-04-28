@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NetPress.Models;
 using System.Diagnostics;
+using NetPress.ViewModels;
 
 namespace NetPress.Controllers
 {

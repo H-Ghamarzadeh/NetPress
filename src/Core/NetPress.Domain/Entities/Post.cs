@@ -11,6 +11,6 @@ namespace NetPress.Domain.Entities
         public string? Excerpt { get; set; }
         [Required]
         public string? Slug { get; set; }
-        public ICollection<Category>? Categories { get; set; }
+        public virtual ICollection<Category>? Categories { get; set; }
     }
 }

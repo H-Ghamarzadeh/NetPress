@@ -12,7 +12,7 @@ using NetPress.Persistence;
 namespace NetPress.Persistence.Migrations.SqlServer
 {
     [DbContext(typeof(NetPressDbContext))]
-    [Migration("20240427095808_InitialCreateSqlServer")]
+    [Migration("20240427152512_InitialCreateSqlServer")]
     partial class InitialCreateSqlServer
     {
         /// <inheritdoc />

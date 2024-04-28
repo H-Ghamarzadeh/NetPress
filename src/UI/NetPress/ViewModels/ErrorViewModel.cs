@@ -1,4 +1,4 @@
-namespace NetPress.Models
+namespace NetPress.ViewModels
 {
     public class ErrorViewModel
     {

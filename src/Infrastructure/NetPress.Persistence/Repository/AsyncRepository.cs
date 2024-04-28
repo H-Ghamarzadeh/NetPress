@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
-using System.Security.Cryptography;
 using NetPress.Domain.Common;
 using System.Linq.Expressions;
 
@@ -9,7 +8,7 @@ namespace NetPress.Persistence.Repository
     public class AsyncRepository<T>(NetPressDbContext dbContext) : IAsyncRepository<T>
         where T : BaseEntity
     {
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
         }

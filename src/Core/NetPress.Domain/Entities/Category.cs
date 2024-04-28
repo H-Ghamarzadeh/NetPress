@@ -7,6 +7,6 @@ namespace NetPress.Domain.Entities
     {
         [Required]
         public string? Name { get; set; }
-        public ICollection<Post>? Posts { get; set; }
+        public virtual ICollection<Post>? Posts { get; set; }
     }
 }
