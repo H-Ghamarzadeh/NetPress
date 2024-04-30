@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using HGO.Hub.Interfaces.Actions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NetPress.Application.Actions;
 using NetPress.Domain.Entities;
@@ -12,10 +13,12 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
 
     public async Task Handle(BeforeAppRunAction action)
     {
-        var context = action.ApplicationBuilder.ApplicationServices.CreateScope().ServiceProvider
+        var dbContext = action.ApplicationBuilder.ApplicationServices.CreateScope().ServiceProvider
             .GetRequiredService<NetPressDbContext>();
 
-        if (!context.Pictures.Any())
+        await dbContext.Database.MigrateAsync();
+
+        if (!dbContext.Pictures.Any())
         {
             //Category images
             var pictures = new Faker<Picture>()
@@ -23,8 +26,8 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
                 .RuleFor(p => p.Url, _ => _.Image.PicsumUrl(128, 128))
                 .RuleFor(p => p.Width, _ => 128)
                 .RuleFor(p => p.Height, _ => 128)
-                .Generate(20);
-            context.Pictures.AddRange(pictures);
+                .Generate(200);
+            dbContext.Pictures.AddRange(pictures);
 
             //Post images
             pictures = new Faker<Picture>()
@@ -32,22 +35,22 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
                 .RuleFor(p => p.Url, _ => _.Image.PicsumUrl(640, 480))
                 .RuleFor(p => p.Width, _ => 640)
                 .RuleFor(p => p.Height, _ => 480)
-                .Generate(50);
-            context.Pictures.AddRange(pictures);
+                .Generate(2000);
+            dbContext.Pictures.AddRange(pictures);
 
-            await context.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
 
-        if (!context.Categories.Any())
+        if (!dbContext.Categories.Any())
         {
-            var pictures = context.Pictures.Where(p => p.Width <= 128).ToList();
+            var pictures = dbContext.Pictures.Where(p => p.Width <= 128).ToList();
 
             var categories = new Faker<Category>()
                 .RuleFor(p => p.Name, _ => _.Commerce.Categories(1)[0])
                 .RuleFor(p=> p.Slug, _ => _.Commerce.Categories(1)[0].ToUrlSlug())
-                .Generate(20);
-            context.Categories.AddRange(categories);
-            await context.SaveChangesAsync();
+                .Generate(200);
+            dbContext.Categories.AddRange(categories);
+            await dbContext.SaveChangesAsync();
 
             foreach (var category in categories)
             {
@@ -60,24 +63,24 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
                     });
                 }
             }
-            await context.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
 
-        if (!context.Posts.Any())
+        if (!dbContext.Posts.Any())
         {
-            var categories = context.Categories.ToList();
-            var pictures = context.Pictures.Where(p=> p.Width >= 640).ToList();
+            var categories = dbContext.Categories.ToList();
+            var pictures = dbContext.Pictures.Where(p=> p.Width >= 640).ToList();
 
             var posts = new Faker<Post>()
                 .RuleFor(p => p.Type, _ => "post")
                 .RuleFor(p => p.Title, _ => _.Lorem.Sentence())
-                .RuleFor(p => p.Content, _ => _.Lorem.Paragraphs(3, 10))
+                .RuleFor(p => p.Content, _ => _.Lorem.Paragraphs(10, 60))
                 .RuleFor(p => p.Excerpt, _ => _.Lorem.Sentence())
                 .RuleFor(p => p.Slug, _ => _.Lorem.Sentence().ToUrlSlug())
                 .RuleFor(p => p.Categories, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
-                .Generate(1000);
-            context.Posts.AddRange(posts);
-            await context.SaveChangesAsync();
+                .Generate(50000);
+            dbContext.Posts.AddRange(posts);
+            await dbContext.SaveChangesAsync();
 
             foreach (var post in posts)
             {
@@ -91,7 +94,7 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
                 }
             }
 
-            await context.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using HGO.Hub.Interfaces.Requests;
+﻿using HGO.Hub;
+using HGO.Hub.Interfaces.Requests;
 using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
 
@@ -9,7 +10,7 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
     {
         public int Priority => 0;
 
-        public async Task<List<Domain.Entities.Post>> Handle(GetLatestPostsListQuery request)
+        public async Task<RequestHandlerResult<List<Domain.Entities.Post>>> Handle(GetLatestPostsListQuery request)
         {
             var pageSize = request.PageSize ?? 16;
             if (pageSize <= 0)
@@ -26,13 +27,13 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
 
             var postType = (string.IsNullOrWhiteSpace(request.PostType) ? "post" : request.PostType).Trim().ToLower();
 
-            return await repository.GetAsQueryable()
-                                   .Where(p=> p.Type == postType)
-                                   .OrderByDescending(p => p.LastModifiedDate)
-                                   .ThenByDescending(p => p.CreatedDate)
-                                   .Skip(pageSize * pageIndex)
-                                   .Take(pageSize)
-                                   .ToListAsync();
+            return new (await repository.GetAsQueryable()
+                .Where(p => p.Type == postType)
+                .OrderByDescending(p => p.LastModifiedDate)
+                .ThenByDescending(p => p.CreatedDate)
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync());
         }
     }
 }

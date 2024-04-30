@@ -9,12 +9,12 @@ namespace NetPress.Persistence.Repository
     {
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await dbContext.Set<T>().ToListAsync();
+            return await dbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public virtual async Task<T?> GetByIdAsync(int id)
         {
-            return await dbContext.Set<T>().FirstOrDefaultAsync(p=> p.Id == id);
+            return await dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(p=> p.Id == id);
         }
 
         public virtual async Task<T> AddAsync(T entity)
@@ -43,7 +43,7 @@ namespace NetPress.Persistence.Repository
 
         public virtual IQueryable<T> GetAsQueryable()
         {
-            return dbContext.Set<T>();
+            return dbContext.Set<T>().AsNoTracking();
         }
     }
 }

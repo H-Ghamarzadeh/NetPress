@@ -11,6 +11,7 @@ namespace NetPress.Persistence.Repository
             return await dbContext.Posts.Include(p => p.Categories)
                                         .Include(p => p.Pictures)
                                         .ThenInclude(p => p.Picture)
+                                        .AsNoTracking()
                                         .FirstOrDefaultAsync(p => p.Id == id);
         }
     }

@@ -32,8 +32,7 @@ namespace NetPress.Controllers
 
             if (model == null)
             {
-                RouteData.Values.Clear();
-                return RedirectToAction("Index", "Blog");
+                return NotFound();
             }
 
             return View(model);
