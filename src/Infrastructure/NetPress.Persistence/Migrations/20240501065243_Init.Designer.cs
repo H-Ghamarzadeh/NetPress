@@ -12,8 +12,8 @@ using NetPress.Persistence;
 namespace NetPress.Persistence.Migrations
 {
     [DbContext(typeof(NetPressDbContext))]
-    [Migration("20240428103036_Images-WH")]
-    partial class ImagesWH
+    [Migration("20240501065243_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,13 +190,20 @@ namespace NetPress.Persistence.Migrations
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Slug", "Type")
+                        .IsUnique();
 
                     b.ToTable("Posts");
                 });

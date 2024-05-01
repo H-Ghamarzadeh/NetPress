@@ -1,5 +1,5 @@
 ﻿@model NetPress.Domain.Entities.Post
 
 <h3>
-    <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id">@Model.Title</a>
+    <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.Slug">@Model.Title</a>
 </h3>

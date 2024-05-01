@@ -25,7 +25,7 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
             }
             pageIndex--;
 
-            var postType = (string.IsNullOrWhiteSpace(request.PostType) ? "post" : request.PostType).Trim().ToLower();
+            var postType = (string.IsNullOrWhiteSpace(request.PostType) ? "blogpost" : request.PostType).Trim().ToLower();
 
             return new (await repository.GetAsQueryable()
                 .Where(p => p.Type == postType)

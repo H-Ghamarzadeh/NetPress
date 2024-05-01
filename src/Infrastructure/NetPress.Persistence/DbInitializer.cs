@@ -72,11 +72,11 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             var pictures = dbContext.Pictures.Where(p=> p.Width >= 640).ToList();
 
             var posts = new Faker<Post>()
-                .RuleFor(p => p.Type, _ => "post")
+                .RuleFor(p => p.Type, _ => "blogpost")
                 .RuleFor(p => p.Title, _ => _.Lorem.Sentence())
                 .RuleFor(p => p.Content, _ => _.Lorem.Paragraphs(10, 60))
                 .RuleFor(p => p.Excerpt, _ => _.Lorem.Sentence())
-                .RuleFor(p => p.Slug, _ => _.Lorem.Sentence().ToUrlSlug())
+                .RuleFor(p => p.Slug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
                 .RuleFor(p => p.Categories, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
                 .Generate(50000);
             dbContext.Posts.AddRange(posts);

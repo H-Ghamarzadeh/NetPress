@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using NetPress.Domain.Common;
 
 namespace NetPress.Domain.Entities
 {
+    [Index("Slug", "Type", IsUnique = true)]
     public class Post: BaseEntity
     {
         [Required]
