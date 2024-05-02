@@ -8,8 +8,8 @@ namespace NetPress.Persistence.Repository
     {
         public override async Task<Post?> GetByIdAsync(int id)
         {
-            return await dbContext.Posts.Include(p => p.Categories)
-                                        .Include(p => p.Pictures)
+            return await dbContext.Posts.Include(p => p.PostCategories)
+                                        .Include(p => p.PostPictures)
                                         .ThenInclude(p => p.Picture)
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync(p => p.Id == id);
@@ -17,11 +17,11 @@ namespace NetPress.Persistence.Repository
 
         public async Task<Post?> GetBySlugAsync(string slug)
         {
-            return await dbContext.Posts.Include(p => p.Categories)
-                .Include(p => p.Pictures)
+            return await dbContext.Posts.Include(p => p.PostCategories)
+                .Include(p => p.PostPictures)
                 .ThenInclude(p => p.Picture)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Slug == slug);
+                .FirstOrDefaultAsync(p => p.PostSlug == slug);
         }
     }
 }

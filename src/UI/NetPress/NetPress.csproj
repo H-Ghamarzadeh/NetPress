@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HGO.Hub" Version="1.0.6" />
+    <PackageReference Include="HGO.Hub" Version="1.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\NetPress.Application\NetPress.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\NetPress.Infrastructure\NetPress.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NetPress.Persistence\NetPress.Persistence.csproj" />
     <ProjectReference Include="..\NetPress.UI.Framework\NetPress.UI.Framework.csproj" />
   </ItemGroup>

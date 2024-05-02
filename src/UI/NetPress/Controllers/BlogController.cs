@@ -1,15 +1,16 @@
 ﻿using HGO.Hub.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NetPress.Application.Features;
-using NetPress.Domain.Entities;
 
 namespace NetPress.Controllers
 {
     public class BlogController(IHub hub) : Controller
     {
         [Route("blog")]
-        [Route("blog/page/{page:int?}")]
-        public async Task<IActionResult> Index(int? page, int? pageSize)
+        [Route("blog/page/{page?}")]
+        [Route("blog/category/{category}")]
+        [Route("blog/category/{category}/page/{page?}")]
+        public async Task<IActionResult> Index(int? page, int? pageSize, string category)
         {
             if (page <= 0 || pageSize <= 0 || pageSize > 500 )
             {

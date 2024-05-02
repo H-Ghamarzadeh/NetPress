@@ -72,12 +72,12 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             var pictures = dbContext.Pictures.Where(p=> p.Width >= 640).ToList();
 
             var posts = new Faker<Post>()
-                .RuleFor(p => p.Type, _ => "blogpost")
-                .RuleFor(p => p.Title, _ => _.Lorem.Sentence())
-                .RuleFor(p => p.Content, _ => _.Lorem.Paragraphs(10, 60))
-                .RuleFor(p => p.Excerpt, _ => _.Lorem.Sentence())
-                .RuleFor(p => p.Slug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
-                .RuleFor(p => p.Categories, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
+                .RuleFor(p => p.PostType, _ => "blogpost")
+                .RuleFor(p => p.PostTitle, _ => _.Lorem.Sentence())
+                .RuleFor(p => p.PostContent, _ => _.Lorem.Paragraphs(10, 60))
+                .RuleFor(p => p.PostExcerpt, _ => _.Lorem.Sentence())
+                .RuleFor(p => p.PostSlug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
+                .RuleFor(p => p.PostCategories, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
                 .Generate(50000);
             dbContext.Posts.AddRange(posts);
             await dbContext.SaveChangesAsync();
@@ -86,7 +86,7 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             {
                 foreach (var picture in pictures.OrderBy(x => new Random().Next()).Take(new Random().Next(1, 5)))
                 {
-                    post.Pictures.Add(new PostPicture()
+                    post.PostPictures.Add(new PostPicture()
                     {
                         PostId = post.Id,
                         PictureId = picture.Id

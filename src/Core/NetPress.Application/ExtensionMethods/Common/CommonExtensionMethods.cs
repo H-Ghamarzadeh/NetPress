@@ -35,7 +35,7 @@ namespace NetPress.Application.ExtensionMethods.Common
             //First to lower case
             value = value.ToLowerInvariant();
 
-            //Remove all accents
+            //Remove all accents 
             var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(value);
             value = Encoding.ASCII.GetString(bytes);
 

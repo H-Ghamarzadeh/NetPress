@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using NetPress.Application.Contracts.Plugins;
 using NetPress.ViewModels;
+using NetPress.Infrastructure.Plugins;
 
 namespace NetPress.Controllers
 {
-    public class HomeController(ILogger<HomeController> logger) : Controller
+    public class HomeController(ILogger<HomeController> logger, IPluginManager pluginManager) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var a = await pluginManager.GetPluginsAsync();
             logger.Log(LogLevel.Trace, "Loading Home Page");
             return View();
         }

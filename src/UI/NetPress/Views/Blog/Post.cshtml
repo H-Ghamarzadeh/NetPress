@@ -5,22 +5,22 @@
 }
 @model NetPress.Domain.Entities.Post
 
-<h1>@Model.Title</h1>
-@foreach (var picture in Model.Pictures?.OrderBy(p => p.DisplayOrder)!)
+<h1>@Model.PostTitle</h1>
+@foreach (var picture in Model.PostPictures?.OrderBy(p => p.DisplayOrder)!)
 {
     <img src="@picture.Picture.Url" />
 }
 <br/>
 <span>@Model.CreatedDate.ToString("D")</span>
-@if (Model.Categories?.Any() == true)
+@if (Model.PostCategories?.Any() == true)
 {
     <ul>
-        @foreach(var category in Model.Categories)
+        @foreach(var category in Model.PostCategories)
         {
             <li>@category.Name</li>
         }
     </ul>   
 }
 <br/>
-@Model.Content
+@Model.PostContent
 

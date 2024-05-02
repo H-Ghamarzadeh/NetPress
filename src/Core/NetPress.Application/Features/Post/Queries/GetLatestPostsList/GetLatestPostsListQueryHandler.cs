@@ -28,7 +28,7 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
             var postType = (string.IsNullOrWhiteSpace(request.PostType) ? "blogpost" : request.PostType).Trim().ToLower();
 
             return new (await repository.GetAsQueryable()
-                .Where(p => p.Type == postType)
+                .Where(p => p.PostType == postType)
                 .OrderByDescending(p => p.LastModifiedDate)
                 .ThenByDescending(p => p.CreatedDate)
                 .Skip(pageSize * pageIndex)

@@ -1,0 +1,11 @@
+﻿using Microsoft.EntityFrameworkCore;
+using NetPress.Domain.Common;
+
+namespace NetPress.Domain.Entities;
+
+[Index("OptionName", IsUnique = false)]
+public class Option : BaseEntity
+{
+    public string OptionName { get; set; }
+    public string OptionValue { get; set; }
+}

@@ -5,18 +5,18 @@ using NetPress.Domain.Common;
 
 namespace NetPress.Domain.Entities
 {
-    [Index("Slug", "Type", IsUnique = true)]
+    [Index("PostSlug", "PostType", IsUnique = true)]
     public class Post: BaseEntity
     {
         [Required]
-        public string Type { get; set; }
+        public required string PostType { get; set; }
         [Required]
-        public string Title { get; set; }
-        public string? Content { get; set; }
-        public string? Excerpt { get; set; }
+        public required string PostTitle { get; set; }
+        public string? PostContent { get; set; }
+        public string? PostExcerpt { get; set; }
         [Required]
-        public string Slug { get; set; }
-        public virtual ICollection<Category>? Categories { get; set; } = new List<Category>();
-        public virtual ICollection<PostPicture>? Pictures { get; set; } = new List<PostPicture>();
+        public required string PostSlug { get; set; }
+        public virtual ICollection<Category>? PostCategories { get; set; } = new List<Category>();
+        public virtual ICollection<PostPicture>? PostPictures { get; set; } = new List<PostPicture>();
     }
 }

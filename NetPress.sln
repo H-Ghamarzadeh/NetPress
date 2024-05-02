@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.Persistence.Integr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.API.IntegrationTest", "test\NetPress.API.IntegrationTest\NetPress.API.IntegrationTest.csproj", "{08C27BA1-C4E5-4BF2-B870-D5C816A344CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPress.UI.Framework", "src\UI\NetPress.UI.Framework\NetPress.UI.Framework.csproj", "{7BC19354-DDEF-4758-8D66-51155BCA98EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetPress.UI.Framework", "src\UI\NetPress.UI.Framework\NetPress.UI.Framework.csproj", "{7BC19354-DDEF-4758-8D66-51155BCA98EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{8628C852-B080-426D-8FDA-CC8575C1896B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +102,7 @@ Global
 		{02719246-1164-479B-8A79-56C2BEECA1E9} = {2D4D6122-BBEF-4CAB-8C5F-BB339763EC09}
 		{08C27BA1-C4E5-4BF2-B870-D5C816A344CA} = {2D4D6122-BBEF-4CAB-8C5F-BB339763EC09}
 		{7BC19354-DDEF-4758-8D66-51155BCA98EB} = {32B6FE95-3F00-4AF7-9543-4F6B292FF250}
+		{8628C852-B080-426D-8FDA-CC8575C1896B} = {C5D5F36C-8088-459C-A740-22B1267F1C5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F61D5248-0D36-4517-BC81-B65A69C561EF}

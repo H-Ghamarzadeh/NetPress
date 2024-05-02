@@ -4,6 +4,7 @@ using NetPress.Persistence;
 using System.Reflection;
 using HGO.Hub.Interfaces;
 using NetPress.Application.Actions;
+using NetPress.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddHgoHub(configuration =>
 });
 
 builder.Services.AddNetPressPersistenceServices(builder.Configuration);
+builder.Services.AddNetPressInfrastructureServices(builder.Configuration);
 
 // generate lowercase URLs
 builder.Services.Configure<RouteOptions>(options =>
@@ -56,10 +58,6 @@ app.MapControllerRoute(
 await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new BeforeAppRunAction(app));
 
 app.Run();
-
-//Do all registered actions after run the application
-await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterAppRunAction(app));
-
 
 //Get all assemblies to register in the application
 List<Assembly> GetAssembliesToRegister()

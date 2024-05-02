@@ -24,13 +24,13 @@ namespace NetPress.Persistence.Migrations
 
             modelBuilder.Entity("CategoryPost", b =>
                 {
-                    b.Property<int>("CategoriesId")
+                    b.Property<int>("PostCategoriesId")
                         .HasColumnType("int");
 
                     b.Property<int>("PostsId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoriesId", "PostsId");
+                    b.HasKey("PostCategoriesId", "PostsId");
 
                     b.HasIndex("PostsId");
 
@@ -111,6 +111,99 @@ namespace NetPress.Persistence.Migrations
                     b.ToTable("CategoryPictures");
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CommentAuthorEmail")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CommentAuthorIp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommentAuthorName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CommentAuthorUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommentContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CommentIsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentAuthorEmail");
+
+                    b.HasIndex("CommentAuthorName");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OptionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OptionValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OptionName");
+
+                    b.ToTable("Options");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.Picture", b =>
                 {
                     b.Property<int>("Id")
@@ -167,17 +260,11 @@ namespace NetPress.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Excerpt")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
@@ -185,21 +272,27 @@ namespace NetPress.Persistence.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Slug")
+                    b.Property<string>("PostContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostExcerpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostSlug")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("PostTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("PostType")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Slug", "Type")
+                    b.HasIndex("PostSlug", "PostType")
                         .IsUnique();
 
                     b.ToTable("Posts");
@@ -247,7 +340,7 @@ namespace NetPress.Persistence.Migrations
                 {
                     b.HasOne("NetPress.Domain.Entities.Category", null)
                         .WithMany()
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("PostCategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -277,6 +370,23 @@ namespace NetPress.Persistence.Migrations
                     b.Navigation("Picture");
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Comment", "ParentComment")
+                        .WithMany()
+                        .HasForeignKey("ParentCommentId");
+
+                    b.HasOne("NetPress.Domain.Entities.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.PostPicture", b =>
                 {
                     b.HasOne("NetPress.Domain.Entities.Picture", "Picture")
@@ -286,7 +396,7 @@ namespace NetPress.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("NetPress.Domain.Entities.Post", "Post")
-                        .WithMany("Pictures")
+                        .WithMany("PostPictures")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,7 +413,7 @@ namespace NetPress.Persistence.Migrations
 
             modelBuilder.Entity("NetPress.Domain.Entities.Post", b =>
                 {
-                    b.Navigation("Pictures");
+                    b.Navigation("PostPictures");
                 });
 #pragma warning restore 612, 618
         }

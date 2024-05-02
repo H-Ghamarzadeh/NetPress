@@ -1,6 +1,7 @@
 ﻿using HGO.Hub;
 using HGO.Hub.Interfaces.Requests;
 using NetPress.Application.Contracts.Persistence;
+using NetPress.Application.Exceptions;
 
 namespace NetPress.Application.Features.Post.Queries.GetPostDetails
 {
@@ -11,12 +12,23 @@ namespace NetPress.Application.Features.Post.Queries.GetPostDetails
 
         public async Task<RequestHandlerResult<Domain.Entities.Post>> Handle(GetPostDetailsQuery request)
         {
-            if(request.PostId != null)
-                return new RequestHandlerResult<Domain.Entities.Post>(await repository.GetByIdAsync(request.PostId.Value));
-            if(!string.IsNullOrWhiteSpace(request.Slug))
-                return new RequestHandlerResult<Domain.Entities.Post>(await repository.GetBySlugAsync(request.Slug));
+            if (string.IsNullOrWhiteSpace(request.Slug) && request.PostId == null)
+            {
+                throw new MissingOrInvalidOrNullPropertyValueException(request.GetType(), nameof(request.PostId), nameof(request.Slug));
+            }
 
-            return new RequestHandlerResult<Domain.Entities.Post>(null);
+            Domain.Entities.Post? result = null;
+            if (request.PostId != null)
+                result = await repository.GetByIdAsync(request.PostId.Value);
+            if(!string.IsNullOrWhiteSpace(request.Slug))
+                result = await repository.GetBySlugAsync(request.Slug);
+
+            if (result == null)
+            {
+                throw new EntityNotFoundException(typeof(Domain.Entities.Post), $"ID: {request.PostId}", $"Slug: {request.Slug}");
+            }
+
+            return new RequestHandlerResult<Domain.Entities.Post>(result);
         }
     }
 }
