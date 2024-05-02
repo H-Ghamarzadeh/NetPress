@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using NetPress.Application.Contracts.Plugins;
 using NetPress.ViewModels;
-using NetPress.Infrastructure.Plugins;
 
 namespace NetPress.Controllers
 {

@@ -56,10 +56,12 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             {
                 foreach (var picture in pictures.OrderBy(x => new Random().Next()).Take(new Random().Next(0, 2)))
                 {
-                    category.Pictures.Add(new CategoryPicture()
+                    category.Pictures?.Add(new CategoryPicture()
                     {
                         CategoryId = category.Id,
-                        PictureId = picture.Id
+                        PictureId = picture.Id,
+                        Picture = picture,
+                        Category = category
                     });
                 }
             }
@@ -86,10 +88,12 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             {
                 foreach (var picture in pictures.OrderBy(x => new Random().Next()).Take(new Random().Next(1, 5)))
                 {
-                    post.PostPictures.Add(new PostPicture()
+                    post.PostPictures?.Add(new PostPicture()
                     {
                         PostId = post.Id,
-                        PictureId = picture.Id
+                        PictureId = picture.Id,
+                        Post = post,
+                        Picture = picture
                     });
                 }
             }

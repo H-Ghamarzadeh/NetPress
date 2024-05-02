@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using NetPress.Application.Contracts.Plugins;
+using System;
 using System.Text.Json;
 
 namespace NetPress.Infrastructure.Plugins
@@ -35,7 +36,8 @@ namespace NetPress.Infrastructure.Plugins
             foreach (var descriptorFile in pluginsDescriptorFiles)
             {
                 var pluginDescriptor = JsonSerializer.Deserialize<PluginDescriptor>(await File.ReadAllTextAsync(descriptorFile));
-                if (File.Exists(Path.Combine(Path.GetDirectoryName(descriptorFile), pluginDescriptor.AssemblyName)))
+
+                if (pluginDescriptor != null && File.Exists(Path.Combine(Path.GetDirectoryName(descriptorFile) ?? throw new NullReferenceException(), pluginDescriptor.AssemblyName)))
                 {
                     result.Add(pluginDescriptor);
                 }

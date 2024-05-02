@@ -54,21 +54,21 @@ namespace NetPress.UI.Framework
         /// <summary>
         /// Get value of the specified key from the current http request query strings and convert it to typeof(T)
         /// </summary>
-        public T Query<T>(string key, T defaultValue = default(T)) => ViewContext.HttpContext.Request.Query[key].ToString().To<T>(defaultValue);
+        public T? Query<T>(string key, T? defaultValue = default) => ViewContext.HttpContext.Request.Query[key].ToString().To(defaultValue);
 
         /// <summary>
         /// Get value of the specified key from the current http request query strings as string
         /// </summary>
-        public string Query(string key) => Query(key, "");
+        public string? Query(string key) => Query<string>(key);
 
         /// <summary>
         /// Get value of the specified key from the current http request form data and convert it to typeof(T)
         /// </summary>
-        public T Form<T>(string key, T defaultValue = default(T)) => ViewContext.HttpContext.Request.Form[key].ToString().To<T>(defaultValue);
+        public T? Form<T>(string key, T? defaultValue = default) => ViewContext.HttpContext.Request.Form[key].ToString().To(defaultValue);
 
         /// <summary>
         /// Get value of the specified key from the current http request form data as string
         /// </summary>
-        public string Form(string key) => Form(key, "");
+        public string? Form(string key) => Form<string>(key);
     }
 }

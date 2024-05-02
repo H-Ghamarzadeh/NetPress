@@ -1,5 +1,4 @@
 ﻿using NetPress.Domain.Common;
-using System.Linq.Expressions;
 
 namespace NetPress.Application.Contracts.Persistence
 {

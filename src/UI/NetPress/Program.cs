@@ -32,7 +32,7 @@ builder.Services.Configure<RouteOptions>(options =>
 var app = builder.Build();
 
 //Do all registered actions after build the application
-await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new AfterBuildApplicationAction(app));
+await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAsync(new AfterBuildApplicationAction(app), true);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -55,7 +55,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //Do all registered actions before run the application (e.g.: DbInitializer)
-await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAndHandleExceptionsAsync(new BeforeAppRunAction(app));
+await app.Services.CreateScope().ServiceProvider.GetRequiredService<IHub>().DoActionAsync(new BeforeAppRunAction(app), true);
 
 app.Run();
 

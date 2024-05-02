@@ -12,7 +12,7 @@ namespace NetPress.Application.ExtensionMethods.Common
         /// <param name="input"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static T To<T>(this object input, T defaultValue = default(T))
+        public static T? To<T>(this object input, T? defaultValue = default)
         {
             try
             {

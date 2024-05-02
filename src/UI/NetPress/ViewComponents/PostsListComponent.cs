@@ -5,9 +5,9 @@ namespace NetPress.ViewComponents
 {
     public class PostsListComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(List<Post>? posts)
+        public IViewComponentResult Invoke(List<Post> posts)
         {
-            if (posts == null) Content("");
+            if (posts.Count == 0) return Content("");
 
             return View(model: posts);
         }

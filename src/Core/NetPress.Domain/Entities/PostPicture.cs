@@ -12,7 +12,7 @@ public class PostPicture : BaseEntity
     public int DisplayOrder { get; set; }
 
     [Required]
-    public virtual Picture Picture { get; set; }
+    public virtual required Picture Picture { get; set; }
     [Required]
-    public virtual Post Post { get; set; }
+    public virtual required Post Post { get; set; }
 }

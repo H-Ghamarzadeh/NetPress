@@ -11,7 +11,7 @@ public class CategoryPicture : BaseEntity
     public int CategoryId { get; set; }
     public int DisplayOrder { get; set; }
     [Required]
-    public virtual Picture Picture { get; set; } 
+    public virtual required Picture Picture { get; set; } 
     [Required]
-    public virtual Category Category { get; set; }
+    public virtual required Category Category { get; set; }
 }
