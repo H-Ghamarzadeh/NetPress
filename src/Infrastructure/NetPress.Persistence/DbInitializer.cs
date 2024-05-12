@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NetPress.Application.Actions;
 using NetPress.Domain.Entities;
 using NetPress.Application.ExtensionMethods.Common;
-using NetPress.Domain.Enums;
+using NetPress.Domain.Constants;
 
 namespace NetPress.Persistence;
 
@@ -49,7 +49,7 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             var categories = new Faker<Taxonomy>()
                 .RuleFor(p => p.TaxonomyName, _ => _.Commerce.Categories(1)[0])
                 .RuleFor(p=> p.TaxonomySlug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
-                .RuleFor(p=> p.TaxonomyType, _ => TaxonomiesType.Category.ToString())
+                .RuleFor(p=> p.TaxonomyType, _ => TaxonomiesType.Category)
                 .Generate(200);
             dbContext.Taxonomies.AddRange(categories);
             await dbContext.SaveChangesAsync();
@@ -76,13 +76,13 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             var pictures = dbContext.Pictures.Where(p=> p.Width >= 640).ToList();
 
             var posts = new Faker<Post>()
-                .RuleFor(p => p.PostType, _ => "blogpost")
+                .RuleFor(p => p.PostType, _ => PostsType.BlogPost)
                 .RuleFor(p => p.PostTitle, _ => _.Lorem.Sentence())
                 .RuleFor(p => p.PostContent, _ => _.Lorem.Paragraphs(10, 60))
                 .RuleFor(p => p.PostExcerpt, _ => _.Lorem.Sentence())
                 .RuleFor(p => p.PostSlug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
                 .RuleFor(p => p.PostTaxonomies, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
-                .Generate(50000);
+                .Generate(10000);
             dbContext.Posts.AddRange(posts);
             await dbContext.SaveChangesAsync();
 

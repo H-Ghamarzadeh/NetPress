@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
-using NetPress.Domain.Common;
+using NetPress.Domain.Entities;
 
 namespace NetPress.Persistence.Repository
 {

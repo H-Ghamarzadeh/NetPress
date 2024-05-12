@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetPress.Domain.Common;
 
 namespace NetPress.Domain.Entities;
 

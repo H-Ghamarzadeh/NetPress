@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NetPress.Application.Exceptions;
 using NetPress.Application.Features;
+using NetPress.Domain.Constants;
 using NetPress.Domain.Entities;
 
 namespace NetPress.Controllers
@@ -20,7 +21,7 @@ namespace NetPress.Controllers
                 return RedirectToAction("Index", "Blog");
             }
 
-            var model = await hub.RequestAsync(new GetLatestPostsListQuery("blogpost", pageSize, page));
+            var model = await hub.RequestAsync(new GetLatestPostsListQuery(PostsType.BlogPost, pageSize, page));
 
             return View(model);
         }

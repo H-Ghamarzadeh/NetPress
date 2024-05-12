@@ -2,6 +2,7 @@
 using HGO.Hub.Interfaces.Requests;
 using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
+using NetPress.Domain.Constants;
 
 namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
 {
@@ -25,7 +26,7 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
             }
             pageIndex--;
 
-            var postType = (string.IsNullOrWhiteSpace(request.PostType) ? "blogpost" : request.PostType).Trim().ToLower();
+            var postType = string.IsNullOrWhiteSpace(request.PostType) ? PostsType.BlogPost : request.PostType;
 
             return new (await repository.GetAsQueryable()
                 .Where(p => p.PostType == postType)

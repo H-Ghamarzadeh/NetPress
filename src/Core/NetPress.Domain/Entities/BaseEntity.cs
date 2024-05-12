@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NetPress.Domain.Common
+namespace NetPress.Domain.Entities
 {
     public class BaseEntity
     {

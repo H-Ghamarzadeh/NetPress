@@ -1,9 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using NetPress.Domain.Constants
 @model NetPress.Domain.Entities.Post
+
+@{
+    var categories = Model.PostTaxonomies.Where(p => p.TaxonomyType == TaxonomiesType.Category).ToList();
+}
 
 <h1>@Model.PostTitle</h1>
 @foreach (var picture in Model.PostPictures?.OrderBy(p => p.DisplayOrder)!)
@@ -12,10 +12,10 @@
 }
 <br/>
 <span>@Model.CreatedDate.ToString("D")</span>
-@if (Model.PostTaxonomies?.Any() == true)
+@if (categories.Any() == true)
 {
     <ul>
-        @foreach(var category in Model.PostTaxonomies)
+        @foreach (var category in categories)
         {
             <li>@category.TaxonomyName</li>
         }

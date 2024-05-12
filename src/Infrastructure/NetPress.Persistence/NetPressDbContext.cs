@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetPress.Domain.Common;
 using NetPress.Domain.Entities;
 
 namespace NetPress.Persistence
@@ -36,11 +35,15 @@ namespace NetPress.Persistence
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<PostMetaData> PostMetaData { get; set; }
         public DbSet<PostPicture> PostPictures { get; set; }
         public DbSet<Taxonomy> Taxonomies { get; set; }
-        public DbSet<TaxonomyPicture> CategoryPictures { get; set; }
+        public DbSet<TaxonomyMetaData> TaxonomyMetaData { get; set; }
+        public DbSet<TaxonomyPicture> TaxonomyPictures { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<PictureMetaData> PictureMetaData { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentMetaData> CommentMetaData { get; set; }
         public DbSet<Option> Options { get; set; }
     }
 }

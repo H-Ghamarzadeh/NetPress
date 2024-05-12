@@ -12,7 +12,7 @@ using NetPress.Persistence;
 namespace NetPress.Persistence.Migrations
 {
     [DbContext(typeof(NetPressDbContext))]
-    [Migration("20240512074849_Init")]
+    [Migration("20240512085652_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -83,6 +83,45 @@ namespace NetPress.Persistence.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.CommentMetaData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("Key");
+
+                    b.ToTable("CommentMetaData");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.Option", b =>
                 {
                     b.Property<int>("Id")
@@ -134,9 +173,6 @@ namespace NetPress.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Format")
                         .HasColumnType("nvarchar(max)");
 
@@ -163,6 +199,45 @@ namespace NetPress.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.PictureMetaData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PictureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("PictureId");
+
+                    b.ToTable("PictureMetaData");
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.Post", b =>
@@ -209,6 +284,45 @@ namespace NetPress.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.PostMetaData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostMetaData");
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.PostPicture", b =>
@@ -297,6 +411,45 @@ namespace NetPress.Persistence.Migrations
                     b.ToTable("Taxonomies");
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyMetaData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TaxonomyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("TaxonomyId");
+
+                    b.ToTable("TaxonomyMetaData");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyPicture", b =>
                 {
                     b.Property<int>("Id")
@@ -332,7 +485,7 @@ namespace NetPress.Persistence.Migrations
 
                     b.HasIndex("TaxonomyId");
 
-                    b.ToTable("CategoryPictures");
+                    b.ToTable("TaxonomyPictures");
                 });
 
             modelBuilder.Entity("PostTaxonomy", b =>
@@ -367,6 +520,39 @@ namespace NetPress.Persistence.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.CommentMetaData", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Comment", "Comment")
+                        .WithMany("CommentMetaData")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.PictureMetaData", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Picture", "Picture")
+                        .WithMany("PictureMetaData")
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Picture");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.PostMetaData", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Post", "Post")
+                        .WithMany("PostMetaData")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.PostPicture", b =>
                 {
                     b.HasOne("NetPress.Domain.Entities.Picture", "Picture")
@@ -393,6 +579,17 @@ namespace NetPress.Persistence.Migrations
                         .HasForeignKey("ParentTaxonomyId");
 
                     b.Navigation("ParentTaxonomy");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyMetaData", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Taxonomy", "Taxonomy")
+                        .WithMany("TaxonomyMetaData")
+                        .HasForeignKey("TaxonomyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Taxonomy");
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyPicture", b =>
@@ -429,13 +626,27 @@ namespace NetPress.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NetPress.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("CommentMetaData");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.Picture", b =>
+                {
+                    b.Navigation("PictureMetaData");
+                });
+
             modelBuilder.Entity("NetPress.Domain.Entities.Post", b =>
                 {
+                    b.Navigation("PostMetaData");
+
                     b.Navigation("PostPictures");
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.Taxonomy", b =>
                 {
+                    b.Navigation("TaxonomyMetaData");
+
                     b.Navigation("TaxonomyPictures");
                 });
 #pragma warning restore 612, 618

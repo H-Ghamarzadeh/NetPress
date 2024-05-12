@@ -1,4 +1,4 @@
-﻿using NetPress.Domain.Common;
+﻿using NetPress.Domain.Entities;
 
 namespace NetPress.Application.Contracts.Persistence
 {
