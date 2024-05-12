@@ -12,12 +12,12 @@
 }
 <br/>
 <span>@Model.CreatedDate.ToString("D")</span>
-@if (Model.PostCategories?.Any() == true)
+@if (Model.PostTaxonomies?.Any() == true)
 {
     <ul>
-        @foreach(var category in Model.PostCategories)
+        @foreach(var category in Model.PostTaxonomies)
         {
-            <li>@category.Name</li>
+            <li>@category.TaxonomyName</li>
         }
     </ul>   
 }

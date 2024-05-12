@@ -24,7 +24,7 @@ namespace NetPress.Persistence
             });
 
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITaxonomyRepository, TaxonomyRepository>();
         }
     }
 }

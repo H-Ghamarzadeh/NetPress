@@ -12,32 +12,13 @@ namespace NetPress.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Options",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OptionName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OptionValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OptionValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -93,14 +74,16 @@ namespace NetPress.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryPictures",
+                name: "Taxonomies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PictureId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    TaxonomyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxonomySlug = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TaxonomyType = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TaxonomyDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentTaxonomyId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -108,43 +91,12 @@ namespace NetPress.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryPictures", x => x.Id);
+                    table.PrimaryKey("PK_Taxonomies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CategoryPictures_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategoryPictures_Pictures_PictureId",
-                        column: x => x.PictureId,
-                        principalTable: "Pictures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CategoryPost",
-                columns: table => new
-                {
-                    PostCategoriesId = table.Column<int>(type: "int", nullable: false),
-                    PostsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryPost", x => new { x.PostCategoriesId, x.PostsId });
-                    table.ForeignKey(
-                        name: "FK_CategoryPost_Categories_PostCategoriesId",
-                        column: x => x.PostCategoriesId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategoryPost_Posts_PostsId",
-                        column: x => x.PostsId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Taxonomies_Taxonomies_ParentTaxonomyId",
+                        column: x => x.ParentTaxonomyId,
+                        principalTable: "Taxonomies",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -213,10 +165,60 @@ namespace NetPress.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_CategoryPictures_CategoryId",
-                table: "CategoryPictures",
-                column: "CategoryId");
+            migrationBuilder.CreateTable(
+                name: "CategoryPictures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PictureId = table.Column<int>(type: "int", nullable: false),
+                    TaxonomyId = table.Column<int>(type: "int", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryPictures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CategoryPictures_Pictures_PictureId",
+                        column: x => x.PictureId,
+                        principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryPictures_Taxonomies_TaxonomyId",
+                        column: x => x.TaxonomyId,
+                        principalTable: "Taxonomies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostTaxonomy",
+                columns: table => new
+                {
+                    PostTaxonomiesId = table.Column<int>(type: "int", nullable: false),
+                    TaxonomyPostsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostTaxonomy", x => new { x.PostTaxonomiesId, x.TaxonomyPostsId });
+                    table.ForeignKey(
+                        name: "FK_PostTaxonomy_Posts_TaxonomyPostsId",
+                        column: x => x.TaxonomyPostsId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostTaxonomy_Taxonomies_PostTaxonomiesId",
+                        column: x => x.PostTaxonomiesId,
+                        principalTable: "Taxonomies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryPictures_PictureId",
@@ -224,9 +226,9 @@ namespace NetPress.Persistence.Migrations
                 column: "PictureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryPost_PostsId",
-                table: "CategoryPost",
-                column: "PostsId");
+                name: "IX_CategoryPictures_TaxonomyId",
+                table: "CategoryPictures",
+                column: "TaxonomyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_CommentAuthorEmail",
@@ -268,6 +270,22 @@ namespace NetPress.Persistence.Migrations
                 table: "Posts",
                 columns: new[] { "PostSlug", "PostType" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostTaxonomy_TaxonomyPostsId",
+                table: "PostTaxonomy",
+                column: "TaxonomyPostsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxonomies_ParentTaxonomyId",
+                table: "Taxonomies",
+                column: "ParentTaxonomyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxonomies_TaxonomySlug_TaxonomyType",
+                table: "Taxonomies",
+                columns: new[] { "TaxonomySlug", "TaxonomyType" },
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -275,9 +293,6 @@ namespace NetPress.Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CategoryPictures");
-
-            migrationBuilder.DropTable(
-                name: "CategoryPost");
 
             migrationBuilder.DropTable(
                 name: "Comments");
@@ -289,13 +304,16 @@ namespace NetPress.Persistence.Migrations
                 name: "PostPictures");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "PostTaxonomy");
 
             migrationBuilder.DropTable(
                 name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "Taxonomies");
         }
     }
 }

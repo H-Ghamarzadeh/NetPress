@@ -8,7 +8,7 @@ namespace NetPress.Persistence.Repository
     {
         public override async Task<Post?> GetByIdAsync(int id)
         {
-            return await dbContext.Posts.Include(p => p.PostCategories)
+            return await dbContext.Posts.Include(p => p.PostTaxonomies)
                                         .Include(p => p.PostPictures)
                                         .ThenInclude(p => p.Picture)
                                         .AsNoTracking()
@@ -17,7 +17,7 @@ namespace NetPress.Persistence.Repository
 
         public async Task<Post?> GetBySlugAsync(string slug)
         {
-            return await dbContext.Posts.Include(p => p.PostCategories)
+            return await dbContext.Posts.Include(p => p.PostTaxonomies)
                 .Include(p => p.PostPictures)
                 .ThenInclude(p => p.Picture)
                 .AsNoTracking()

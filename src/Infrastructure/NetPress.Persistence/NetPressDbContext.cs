@@ -37,8 +37,8 @@ namespace NetPress.Persistence
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostPicture> PostPictures { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryPicture> CategoryPictures { get; set; }
+        public DbSet<Taxonomy> Taxonomies { get; set; }
+        public DbSet<TaxonomyPicture> CategoryPictures { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Option> Options { get; set; }

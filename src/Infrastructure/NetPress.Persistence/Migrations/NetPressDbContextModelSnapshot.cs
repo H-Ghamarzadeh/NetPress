@@ -22,95 +22,6 @@ namespace NetPress.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CategoryPost", b =>
-                {
-                    b.Property<int>("PostCategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PostCategoriesId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("CategoryPost");
-                });
-
-            modelBuilder.Entity("NetPress.Domain.Entities.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("NetPress.Domain.Entities.CategoryPicture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PictureId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("PictureId");
-
-                    b.ToTable("CategoryPictures");
-                });
-
             modelBuilder.Entity("NetPress.Domain.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +105,6 @@ namespace NetPress.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OptionValue")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -336,38 +246,105 @@ namespace NetPress.Persistence.Migrations
                     b.ToTable("PostPictures");
                 });
 
-            modelBuilder.Entity("CategoryPost", b =>
+            modelBuilder.Entity("NetPress.Domain.Entities.Taxonomy", b =>
                 {
-                    b.HasOne("NetPress.Domain.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("PostCategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("NetPress.Domain.Entities.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentTaxonomyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaxonomyDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxonomyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxonomySlug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TaxonomyType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentTaxonomyId");
+
+                    b.HasIndex("TaxonomySlug", "TaxonomyType")
+                        .IsUnique();
+
+                    b.ToTable("Taxonomies");
                 });
 
-            modelBuilder.Entity("NetPress.Domain.Entities.CategoryPicture", b =>
+            modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyPicture", b =>
                 {
-                    b.HasOne("NetPress.Domain.Entities.Category", "Category")
-                        .WithMany("Pictures")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("NetPress.Domain.Entities.Picture", "Picture")
-                        .WithMany()
-                        .HasForeignKey("PictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Navigation("Category");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("Picture");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PictureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxonomyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PictureId");
+
+                    b.HasIndex("TaxonomyId");
+
+                    b.ToTable("CategoryPictures");
+                });
+
+            modelBuilder.Entity("PostTaxonomy", b =>
+                {
+                    b.Property<int>("PostTaxonomiesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxonomyPostsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostTaxonomiesId", "TaxonomyPostsId");
+
+                    b.HasIndex("TaxonomyPostsId");
+
+                    b.ToTable("PostTaxonomy");
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.Comment", b =>
@@ -406,14 +383,57 @@ namespace NetPress.Persistence.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("NetPress.Domain.Entities.Category", b =>
+            modelBuilder.Entity("NetPress.Domain.Entities.Taxonomy", b =>
                 {
-                    b.Navigation("Pictures");
+                    b.HasOne("NetPress.Domain.Entities.Taxonomy", "ParentTaxonomy")
+                        .WithMany()
+                        .HasForeignKey("ParentTaxonomyId");
+
+                    b.Navigation("ParentTaxonomy");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.TaxonomyPicture", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetPress.Domain.Entities.Taxonomy", "Taxonomy")
+                        .WithMany("TaxonomyPictures")
+                        .HasForeignKey("TaxonomyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Picture");
+
+                    b.Navigation("Taxonomy");
+                });
+
+            modelBuilder.Entity("PostTaxonomy", b =>
+                {
+                    b.HasOne("NetPress.Domain.Entities.Taxonomy", null)
+                        .WithMany()
+                        .HasForeignKey("PostTaxonomiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetPress.Domain.Entities.Post", null)
+                        .WithMany()
+                        .HasForeignKey("TaxonomyPostsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NetPress.Domain.Entities.Post", b =>
                 {
                     b.Navigation("PostPictures");
+                });
+
+            modelBuilder.Entity("NetPress.Domain.Entities.Taxonomy", b =>
+                {
+                    b.Navigation("TaxonomyPictures");
                 });
 #pragma warning restore 612, 618
         }

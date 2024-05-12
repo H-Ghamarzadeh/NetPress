@@ -15,7 +15,7 @@ namespace NetPress.Domain.Entities
         public string? PostExcerpt { get; set; }
         [Required]
         public required string PostSlug { get; set; }
-        public virtual ICollection<Category>? PostCategories { get; set; } = new List<Category>();
+        public virtual ICollection<Taxonomy>? PostTaxonomies { get; set; } = new List<Taxonomy>();
         public virtual ICollection<PostPicture>? PostPictures { get; set; } = new List<PostPicture>();
     }
 }

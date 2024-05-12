@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NetPress.Application.Actions;
 using NetPress.Domain.Entities;
 using NetPress.Application.ExtensionMethods.Common;
+using NetPress.Domain.Enums;
 
 namespace NetPress.Persistence;
 
@@ -41,27 +42,28 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
             await dbContext.SaveChangesAsync();
         }
 
-        if (!dbContext.Categories.Any())
+        if (!dbContext.Taxonomies.Any())
         {
             var pictures = dbContext.Pictures.Where(p => p.Width <= 128).ToList();
 
-            var categories = new Faker<Category>()
-                .RuleFor(p => p.Name, _ => _.Commerce.Categories(1)[0])
-                .RuleFor(p=> p.Slug, _ => _.Commerce.Categories(1)[0].ToUrlSlug())
+            var categories = new Faker<Taxonomy>()
+                .RuleFor(p => p.TaxonomyName, _ => _.Commerce.Categories(1)[0])
+                .RuleFor(p=> p.TaxonomySlug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
+                .RuleFor(p=> p.TaxonomyType, _ => TaxonomiesType.Category.ToString())
                 .Generate(200);
-            dbContext.Categories.AddRange(categories);
+            dbContext.Taxonomies.AddRange(categories);
             await dbContext.SaveChangesAsync();
 
             foreach (var category in categories)
             {
                 foreach (var picture in pictures.OrderBy(x => new Random().Next()).Take(new Random().Next(0, 2)))
                 {
-                    category.Pictures?.Add(new CategoryPicture()
+                    category.TaxonomyPictures?.Add(new TaxonomyPicture()
                     {
-                        CategoryId = category.Id,
+                        TaxonomyId = category.Id,
                         PictureId = picture.Id,
                         Picture = picture,
-                        Category = category
+                        Taxonomy = category
                     });
                 }
             }
@@ -70,7 +72,7 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
 
         if (!dbContext.Posts.Any())
         {
-            var categories = dbContext.Categories.ToList();
+            var categories = dbContext.Taxonomies.ToList();
             var pictures = dbContext.Pictures.Where(p=> p.Width >= 640).ToList();
 
             var posts = new Faker<Post>()
@@ -79,7 +81,7 @@ public class DbInitializer: IActionHandler<BeforeAppRunAction>
                 .RuleFor(p => p.PostContent, _ => _.Lorem.Paragraphs(10, 60))
                 .RuleFor(p => p.PostExcerpt, _ => _.Lorem.Sentence())
                 .RuleFor(p => p.PostSlug, _ => Guid.NewGuid().ToString("N").ToUrlSlug())
-                .RuleFor(p => p.PostCategories, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
+                .RuleFor(p => p.PostTaxonomies, _ => _.PickRandom(categories, 5).ToList().GetRange(0, new Random().Next(0, 5)))
                 .Generate(50000);
             dbContext.Posts.AddRange(posts);
             await dbContext.SaveChangesAsync();

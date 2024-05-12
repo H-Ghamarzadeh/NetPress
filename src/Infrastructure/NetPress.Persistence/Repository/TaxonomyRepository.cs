@@ -4,11 +4,11 @@ using NetPress.Domain.Entities;
 
 namespace NetPress.Persistence.Repository
 {
-    public class CategoryRepository(NetPressDbContext dbContext) : AsyncRepository<Category>(dbContext), ICategoryRepository
+    public class TaxonomyRepository(NetPressDbContext dbContext) : AsyncRepository<Taxonomy>(dbContext), ITaxonomyRepository
     {
-        public override async Task<Category?> GetByIdAsync(int id)
+        public override async Task<Taxonomy?> GetByIdAsync(int id)
         {
-            return await dbContext.Categories.Include(p => p.Pictures)
+            return await dbContext.Taxonomies.Include(p => p.TaxonomyPictures)
                                              .ThenInclude(p => p.Picture)
                                              .FirstOrDefaultAsync(p => p.Id == id);
         }

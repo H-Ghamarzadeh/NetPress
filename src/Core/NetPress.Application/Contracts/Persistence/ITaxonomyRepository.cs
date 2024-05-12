@@ -2,7 +2,7 @@
 
 namespace NetPress.Application.Contracts.Persistence
 {
-    public interface ICategoryRepository: IAsyncRepository<Category>
+    public interface ITaxonomyRepository: IAsyncRepository<Taxonomy>
     {
     }
 }
