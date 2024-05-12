@@ -27,5 +27,16 @@ namespace NetPress.Persistence.Repository
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.PostSlug == slug);
         }
+
+        public async Task<List<Post>> GetLatestPostsAsync(string postType, int pageSize, int pageIndex)
+        {
+            return await GetAsQueryable()
+                .Where(p => p.PostType == postType)
+                .OrderByDescending(p => p.LastModifiedDate)
+                .ThenByDescending(p => p.CreatedDate)
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

@@ -17,7 +17,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHgoHub(options =>
 {
-    options.LogEvents = true;
+    options.LogEvents = false;
     options.HubServiceLifetime = ServiceLifetime.Scoped;
     options.HandlersDefaultLifetime = ServiceLifetime.Scoped;
     options.RegisterServicesFromAssemblies(assemblies.ToArray());

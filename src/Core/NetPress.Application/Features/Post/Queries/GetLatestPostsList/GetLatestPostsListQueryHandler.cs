@@ -1,12 +1,12 @@
 ﻿using HGO.Hub;
+using HGO.Hub.Interfaces;
 using HGO.Hub.Interfaces.Requests;
-using Microsoft.EntityFrameworkCore;
 using NetPress.Application.Contracts.Persistence;
 using NetPress.Domain.Constants;
 
 namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
 {
-    public class GetLatestPostsListQueryHandler(IPostRepository repository)
+    public class GetLatestPostsListQueryHandler(IPostRepository repository, IHub hub)
         : IRequestHandler<GetLatestPostsListQuery, List<Domain.Entities.Post>>
     {
         public int Priority => 0;
@@ -28,13 +28,9 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
 
             var postType = string.IsNullOrWhiteSpace(request.PostType) ? PostsType.BlogPost : request.PostType;
 
-            return new (await repository.GetAsQueryable()
-                .Where(p => p.PostType == postType)
-                .OrderByDescending(p => p.LastModifiedDate)
-                .ThenByDescending(p => p.CreatedDate)
-                .Skip(pageSize * pageIndex)
-                .Take(pageSize)
-                .ToListAsync());
+            var result = await hub.ApplyFiltersAsync(await repository.GetLatestPostsAsync(postType, pageSize, pageIndex));
+
+            return new(result);
         }
     }
 }

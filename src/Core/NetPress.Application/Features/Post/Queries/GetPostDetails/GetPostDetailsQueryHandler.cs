@@ -1,11 +1,12 @@
 ﻿using HGO.Hub;
+using HGO.Hub.Interfaces;
 using HGO.Hub.Interfaces.Requests;
 using NetPress.Application.Contracts.Persistence;
 using NetPress.Application.Exceptions;
 
 namespace NetPress.Application.Features.Post.Queries.GetPostDetails
 {
-    public class GetPostDetailsQueryHandler(IPostRepository repository)
+    public class GetPostDetailsQueryHandler(IPostRepository repository, IHub hub)
         : IRequestHandler<GetPostDetailsQuery, Domain.Entities.Post>
     {
         public int Priority => 0;
@@ -27,6 +28,8 @@ namespace NetPress.Application.Features.Post.Queries.GetPostDetails
             {
                 throw new EntityNotFoundException(typeof(Domain.Entities.Post), $"ID: {request.PostId}", $"Slug: {request.Slug}");
             }
+
+            result = await hub.ApplyFiltersAsync(result);
 
             return new RequestHandlerResult<Domain.Entities.Post>(result);
         }
