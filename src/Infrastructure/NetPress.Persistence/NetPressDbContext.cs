@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace NetPress.Persistence
 {
@@ -17,7 +18,19 @@ namespace NetPress.Persistence
             base.OnModelCreating(modelBuilder);
 
             //Soft Delete
-            modelBuilder.Entity<BaseEntity>().HasQueryFilter(p => !p.IsDeleted);
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var parameter = Expression.Parameter(entityType.ClrType, "e");
+                    var body = Expression.Equal(
+                        Expression.Property(parameter, nameof(BaseEntity.IsDeleted)),
+                        Expression.Constant(false));
+                    var lambda = Expression.Lambda(body, parameter);
+
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+                }
+            }
         }
 
         public override int SaveChanges()

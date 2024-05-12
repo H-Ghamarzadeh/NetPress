@@ -22,7 +22,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +45,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +67,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +89,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,7 +114,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,7 +145,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,7 +176,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,7 +202,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,7 +258,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -275,7 +284,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -306,7 +316,8 @@ namespace NetPress.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -325,6 +336,11 @@ namespace NetPress.Persistence.Migrations
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommentMetaData_IsDeleted",
+                table: "CommentMetaData",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CommentMetaData_Key",
                 table: "CommentMetaData",
                 column: "Key");
@@ -340,6 +356,11 @@ namespace NetPress.Persistence.Migrations
                 column: "CommentAuthorName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_IsDeleted",
+                table: "Comments",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ParentCommentId",
                 table: "Comments",
                 column: "ParentCommentId");
@@ -350,9 +371,19 @@ namespace NetPress.Persistence.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Options_IsDeleted",
+                table: "Options",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Options_OptionName",
                 table: "Options",
                 column: "OptionName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PictureMetaData_IsDeleted",
+                table: "PictureMetaData",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PictureMetaData_Key",
@@ -365,6 +396,16 @@ namespace NetPress.Persistence.Migrations
                 column: "PictureId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pictures_IsDeleted",
+                table: "Pictures",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostMetaData_IsDeleted",
+                table: "PostMetaData",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostMetaData_Key",
                 table: "PostMetaData",
                 column: "Key");
@@ -375,6 +416,11 @@ namespace NetPress.Persistence.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PostPictures_IsDeleted",
+                table: "PostPictures",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostPictures_PictureId",
                 table: "PostPictures",
                 column: "PictureId");
@@ -383,6 +429,11 @@ namespace NetPress.Persistence.Migrations
                 name: "IX_PostPictures_PostId",
                 table: "PostPictures",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_IsDeleted",
+                table: "Posts",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_PostSlug_PostType",
@@ -396,6 +447,11 @@ namespace NetPress.Persistence.Migrations
                 column: "TaxonomyPostsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Taxonomies_IsDeleted",
+                table: "Taxonomies",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Taxonomies_ParentTaxonomyId",
                 table: "Taxonomies",
                 column: "ParentTaxonomyId");
@@ -407,6 +463,11 @@ namespace NetPress.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TaxonomyMetaData_IsDeleted",
+                table: "TaxonomyMetaData",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TaxonomyMetaData_Key",
                 table: "TaxonomyMetaData",
                 column: "Key");
@@ -415,6 +476,11 @@ namespace NetPress.Persistence.Migrations
                 name: "IX_TaxonomyMetaData_TaxonomyId",
                 table: "TaxonomyMetaData",
                 column: "TaxonomyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaxonomyPictures_IsDeleted",
+                table: "TaxonomyPictures",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaxonomyPictures_PictureId",

@@ -20,7 +20,7 @@ namespace NetPress.Application.Features.Post.Queries.GetPostDetails
             Domain.Entities.Post? result = null;
             if (request.PostId != null)
                 result = await repository.GetByIdAsync(request.PostId.Value);
-            if(!string.IsNullOrWhiteSpace(request.Slug))
+            if(result == null && !string.IsNullOrWhiteSpace(request.Slug))
                 result = await repository.GetBySlugAsync(request.Slug);
 
             if (result == null)
