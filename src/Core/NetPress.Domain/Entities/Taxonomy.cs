@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities
 {
-    [Index("TaxonomySlug", "TaxonomyType", IsUnique = true)]
+    [Index(nameof(TaxonomySlug), nameof(TaxonomyType), IsUnique = true)]
     public class Taxonomy : BaseEntity
     {
         [Required]

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities;
 
-[Index("ParentCommentId", IsUnique = false)]
-[Index("CommentAuthorEmail", IsUnique = false)]
-[Index("CommentAuthorName", IsUnique = false)]
-[Index("PostId", IsUnique = false)]
+[Index(nameof(ParentCommentId), IsUnique = false)]
+[Index(nameof(CommentAuthorEmail), IsUnique = false)]
+[Index(nameof(CommentAuthorName), IsUnique = false)]
+[Index(nameof(PostId), IsUnique = false)]
 public class Comment : BaseEntity
 {
     [Required]

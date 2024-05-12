@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities;
 
-[Index("CommentId", IsUnique = false)]
-[Index("Key", IsUnique = false)]
+[Index(nameof(CommentId), IsUnique = false)]
+[Index(nameof(Key), IsUnique = false)]
 public class CommentMetaData : BaseEntity
 {
     [Required]

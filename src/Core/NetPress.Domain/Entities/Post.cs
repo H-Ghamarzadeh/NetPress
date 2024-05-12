@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities
 {
-    [Index("PostSlug", "PostType", IsUnique = true)]
+    [Index(nameof(PostSlug),nameof(PostType), IsUnique = true)]
     public class Post: BaseEntity
     {
         [Required]

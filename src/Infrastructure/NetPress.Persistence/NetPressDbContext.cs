@@ -14,9 +14,27 @@ namespace NetPress.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(NetPressDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+
+            //Soft Delete
+            modelBuilder.Entity<BaseEntity>().HasQueryFilter(p => !p.IsDeleted);
+        }
+
+        public override int SaveChanges()
+        {
+            OnBeforeSaving();
+
+            return base.SaveChanges();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            OnBeforeSaving();
+            
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void OnBeforeSaving()
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
             {
@@ -29,9 +47,12 @@ namespace NetPress.Persistence
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
                         break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDeleted = true;
+                        break;
                 }
             }
-            return base.SaveChangesAsync(cancellationToken);
         }
 
         public DbSet<Post> Posts { get; set; }

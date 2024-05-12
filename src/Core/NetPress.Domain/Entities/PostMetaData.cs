@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetPress.Domain.Entities;
 
-[Index("PostId", IsUnique = false)]
-[Index("Key", IsUnique = false)]
+[Index(nameof(PostId), IsUnique = false)]
+[Index(nameof(Key), IsUnique = false)]
 public class PostMetaData: BaseEntity
 {
     [Required]

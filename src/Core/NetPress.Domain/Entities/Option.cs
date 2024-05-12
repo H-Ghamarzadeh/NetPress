@@ -2,7 +2,7 @@
 
 namespace NetPress.Domain.Entities;
 
-[Index("OptionName", IsUnique = false)]
+[Index(nameof(OptionName), IsUnique = false)]
 public class Option : BaseEntity
 {
     public required string OptionName { get; set; }

@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities;
 
-[Index("TaxonomyId", IsUnique = false)]
-[Index("Key", IsUnique = false)]
+[Index(nameof(TaxonomyId), IsUnique = false)]
+[Index(nameof(Key), IsUnique = false)]
 public class TaxonomyMetaData : BaseEntity
 {
     [Required]

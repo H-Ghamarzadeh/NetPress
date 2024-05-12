@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetPress.Domain.Entities;
 
-[Index("PictureId", IsUnique = false)]
-[Index("Key", IsUnique = false)]
+[Index(nameof(PictureId), IsUnique = false)]
+[Index(nameof(Key), IsUnique = false)]
 public class PictureMetaData : BaseEntity
 {
     [Required]
