@@ -8,11 +8,11 @@ namespace NetPress.Persistence.Repository
     {
         public override async Task<Taxonomy?> GetByIdAsync(int id)
         {
-            return await dbContext.Taxonomies.Include(p => p.TaxonomyMetaData)
-                                             .Include(p => p.TaxonomyPictures)
-                                             .ThenInclude(p => p.Picture)
-                                             .ThenInclude(p => p.PictureMetaData)
-                                             .FirstOrDefaultAsync(p => p.Id == id);
+            return await GetAsQueryable().Include(p => p.TaxonomyMetaData)
+                                         .Include(p => p.TaxonomyPictures)
+                                         .ThenInclude(p => p.Picture)
+                                         .ThenInclude(p => p.PictureMetaData)
+                                         .FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

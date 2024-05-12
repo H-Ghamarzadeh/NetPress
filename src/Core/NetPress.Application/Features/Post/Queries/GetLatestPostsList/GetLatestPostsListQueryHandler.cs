@@ -28,8 +28,9 @@ namespace NetPress.Application.Features.Post.Queries.GetLatestPostsList
 
             var postType = string.IsNullOrWhiteSpace(request.PostType) ? PostsType.BlogPost : request.PostType;
 
-            var result = await hub.ApplyFiltersAsync(await repository.GetLatestPostsAsync(postType, pageSize, pageIndex));
-
+            var result = await repository.GetLatestPostsAsync(postType, pageSize, pageIndex);
+            result = await hub.ApplyFiltersAsync(result);
+            
             return new(result);
         }
     }
