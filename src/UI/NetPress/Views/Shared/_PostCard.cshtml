@@ -1,5 +1,27 @@
 ﻿@model NetPress.Domain.Entities.Post
 
-<h3>
-    <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug">@Model.PostTitle</a>
-</h3>
+<div class="post-card-wraper">
+    <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug" class="post-card-title">@Model.PostTitle</a>
+    <img src="@Model.PostPictures.OrderBy(p=> p.DisplayOrder).FirstOrDefault().Picture.Url"/>
+    <div class="post-card-excerpt">
+        @Model.PostExcerpt
+    </div>
+</div>
+
+
+<style>
+    .post-card-wraper {
+        border-radius: 16px;
+        background-color: white;
+        padding: 8px;
+    }
+
+        .post-card-wraper .post-card-title{
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .post-card-wraper .post-card-excerpt{
+            margin: 0 10px; 
+        }
+</style>

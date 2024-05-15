@@ -36,6 +36,10 @@ namespace NetPress.Persistence.Repository
                 .ThenByDescending(p => p.CreatedDate)
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
+                .Include(p => p.PostMetaData)
+                .Include(p=> p.PostPictures)
+                .ThenInclude(p=> p.Picture)
+                .ThenInclude(p => p.PictureMetaData)
                 .ToListAsync();
         }
     }
