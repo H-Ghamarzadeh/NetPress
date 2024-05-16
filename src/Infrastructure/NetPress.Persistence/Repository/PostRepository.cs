@@ -8,24 +8,24 @@ namespace NetPress.Persistence.Repository
     {
         public override async Task<Post?> GetByIdAsync(int id)
         {
-            return await dbContext.Posts.Include(p => p.PostTaxonomies)
+            return await GetAsQueryable().Where(p=> p.Id == id)
+                                        .Include(p => p.PostTaxonomies)
                                         .Include(p => p.PostMetaData)
                                         .Include(p => p.PostPictures)
                                         .ThenInclude(p => p.Picture)
                                         .ThenInclude(p => p.PictureMetaData)
-                                        .AsNoTracking()
-                                        .FirstOrDefaultAsync(p => p.Id == id);
+                                        .FirstOrDefaultAsync();
         }
 
         public async Task<Post?> GetBySlugAsync(string slug)
         {
-            return await dbContext.Posts.Include(p => p.PostTaxonomies)
+            return await GetAsQueryable().Where(p=> p.PostSlug == slug)
+                .Include(p => p.PostTaxonomies)
                 .Include(p => p.PostMetaData)
                 .Include(p => p.PostPictures)
                 .ThenInclude(p => p.Picture)
                 .ThenInclude(p => p.PictureMetaData)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.PostSlug == slug);
+                .FirstOrDefaultAsync();
         }
 
         public async Task<List<Post>> GetLatestPostsAsync(string postType, int pageSize, int pageIndex)
@@ -36,6 +36,7 @@ namespace NetPress.Persistence.Repository
                 .ThenByDescending(p => p.CreatedDate)
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
+                .Include(p => p.PostTaxonomies)
                 .Include(p => p.PostMetaData)
                 .Include(p=> p.PostPictures)
                 .ThenInclude(p=> p.Picture)
