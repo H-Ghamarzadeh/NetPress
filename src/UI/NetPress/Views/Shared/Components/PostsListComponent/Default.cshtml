@@ -1,8 +1,17 @@
 ﻿@model List<NetPress.Domain.Entities.Post>
+@{
+    int colPerRow = 3;
+}
 
-<div>
-    @foreach (var post in Model)
+@for (int i = 0; i < Model.Count; i += colPerRow)
+{
+    @Html.Raw("<div class=\"row mt-4\">")
+    for (int j = i; j < i + colPerRow; j++)
     {
-        <partial name="_PostCard" model="post"/>
+        if (j < Model.Count)
+        {
+            <partial name="_PostCard" model="Model[j]" />
+        }
     }
-</div>
+    @Html.Raw("</div>")
+}

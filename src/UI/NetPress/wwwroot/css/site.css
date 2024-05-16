@@ -1,18 +1,31 @@
-html {
-  font-size: 14px;
+﻿.post-card-wraper {
+  border-radius: 16px;
+  background-color: white;
+  padding: 8px;
 }
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.post-card-wraper .post-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  display: block;
 }
-
-html {
-  position: relative;
-  min-height: 100%;
+.post-card-wraper .post-card-img {
+  border-radius: 8px;
+  margin: auto;
+  display: block;
+  max-width: 100%;
+}
+.post-card-wraper .post-card-excerpt {
+  text-align: justify;
+}
+.post-card-wraper .post-card-read-more-btn {
+  color: #521E93;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
 }
 
 body {
-  margin-bottom: 60px;
+  background-color: #F8F8F8;
 }

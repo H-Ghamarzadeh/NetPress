@@ -1,0 +1,31 @@
+﻿.post-card-wraper {
+    border-radius: 16px;
+    background-color: white;
+    padding: 8px;
+
+    .post-card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: black;
+        display: block;
+    }
+
+    .post-card-img {
+        border-radius: 8px;
+        margin: auto;
+        display: block;
+        max-width: 100%;
+    }
+
+    .post-card-excerpt {
+        text-align: justify;
+    }
+
+    .post-card-read-more-btn {
+        color: #521E93;
+        text-decoration: none;
+        margin-top: 10px;
+        display:block;
+    }
+}

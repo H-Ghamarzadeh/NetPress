@@ -7,9 +7,12 @@
       "destination": "wwwroot/lib/bootstrap/"
     },
     {
-      "provider": "cdnjs",
       "library": "bootstrap-rtl@3.4.0",
       "destination": "wwwroot/lib/bootstrap-rtl/"
+    },
+    {
+      "library": "font-awesome@6.5.2",
+      "destination": "wwwroot/lib/font-awesome/"
     }
   ]
 }
