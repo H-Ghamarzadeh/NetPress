@@ -1,11 +1,13 @@
 ﻿.post-card-wraper {
     border-radius: 16px;
-    background-color: white;
+    background-color: rgb(var(--post-card-bg-color));
     padding: 8px;
 
     .post-card-title {
+        font-family: var(--head-font-ltr);
         font-size: 1.5rem;
-        font-weight: bold;
+        line-height: 1.2;
+        font-weight: 500;
         text-decoration: none;
         color: black;
         display: block;
@@ -23,9 +25,9 @@
     }
 
     .post-card-read-more-btn {
-        color: #521E93;
+        color: rgb(var(--theme-main-color));
         text-decoration: none;
         margin-top: 10px;
-        display:block;
+        display: block;
     }
 }

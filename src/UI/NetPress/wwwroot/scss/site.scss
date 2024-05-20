@@ -1,5 +1,32 @@
-﻿@import "_post-card.scss";
+﻿@import "../font/ClashDisplay_Complete/Fonts/WEB/css/clash-display.css";
+@import "../font/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
+
+:root {
+    --head-font-ltr: ClashDisplay-Variable;
+    --content-font-ltr: Satoshi-Variable;
+    --font-base-size-ltr: 16px;
+    --font-color: 0,0,0;
+    --background-color: 248, 248, 248;
+    --theme-main-color: 82, 30, 147;
+    --post-card-bg-color: 255, 255, 255;
+}
+
+html {
+    font-family: var(--content-font-ltr);
+    font-size: var(--font-base-size-ltr);
+    color: rgb(var(--font-color));
+}
 
 body {
-    background-color: #F8F8F8;
+    font-family: var(--content-font-ltr);
+    font-size: var(--font-base-size-ltr);
+    color: rgb(var(--font-color));
+    background-color: rgb(var(--background-color));
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0px 0px,0px 0px,0px 0px;
+    background-image: radial-gradient(15vw 20vw at 90vw 5vh,rgba(var(--theme-main-color),.3) 0%,rgba(var(--background-color),0) 100%), radial-gradient(12vw 22vw at 75vw 7vh,rgba(var(--theme-main-color),.16) 0%,rgba(var(--background-color),0) 100%), radial-gradient(15vw 20vw at 77vw calc(100% - 5vh),rgba(var(--theme-main-color),.14) 0%,rgba(var(--background-color),0) 100%), radial-gradient(12vw 22vw at 65vw calc(100% - 7vh),rgba(var(--theme-main-color),.1) 0%,rgba(var(--background-color),0) 100%);
 }
+
+@import "_header";
+@import "_post-card";

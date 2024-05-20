@@ -1,0 +1,67 @@
+/**
+*
+*	Name:			Doran Fonts
+*	Version:			1.3
+*	Author:			Fereshte Iranshahi and Reza Bakhtiarifard
+*	Created on:		Nov 2023
+*	Updated on:		Nov 2023
+*	Vendor:			http://fontiran.com
+*	Copyright:		Commercial/Proprietary Software
+--------------------------------------------------------------------------------------
+فونت دوران یک نرم افزار مالکیتی محسوب می شود. جهت آگاهی از قوانین استفاده از این فونت ها لطفا به وب سایت (فونت ایران دات کام) مراجعه نمایید
+--------------------------------------------------------------------------------------
+Doran fonts are considered a proprietary software. To gain information about the laws regarding the use of these fonts, please visit www.fontiran.com 
+--------------------------------------------------------------------------------------
+This set of fonts are used in this project under the license: (.....)
+------------------------------------------------------------------------------------- fonts/-
+*	
+**/
+
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: 100;
+	src: url('woff/DoranFaNum-Thin.woff') format('woff'),   
+	url('woff2/DoranFaNum-Thin.woff2') format('woff2');		
+}
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: 300;
+	src: url('woff/DoranFaNum-Light.woff') format('woff'),   
+	url('woff2/DoranFaNum-Light.woff2') format('woff2');	
+}
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: normal;
+	src: url('woff/DoranFaNum-Regular.woff') format('woff'),   
+	url('woff2/DoranFaNum-Regular.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: 500;
+	src: url('woff/DoranFaNum-Medium.woff') format('woff'),   
+	url('woff2/DoranFaNum-Medium.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: bold;
+	src: url('woff/DoranFaNum-Bold.woff') format('woff'),   
+	url('woff2/DoranFaNum-Bold.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran FaNum;
+	font-style: normal;
+	font-weight: 800;
+	src: url('woff/DoranFaNum-ExtraBold.woff') format('woff'),   
+	url('woff2/DoranFaNum-ExtraBold.woff2') format('woff2');	 
+}

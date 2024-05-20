@@ -1,11 +1,57 @@
-﻿.post-card-wraper {
+﻿@import "../font/ClashDisplay_Complete/Fonts/WEB/css/clash-display.css";
+@import "../font/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
+:root {
+  --head-font-ltr: ClashDisplay-Variable;
+  --content-font-ltr: Satoshi-Variable;
+  --font-base-size-ltr: 16px;
+  --font-color: 0,0,0;
+  --background-color: 248, 248, 248;
+  --theme-main-color: 82, 30, 147;
+  --post-card-bg-color: 255, 255, 255;
+}
+
+html {
+  font-family: var(--content-font-ltr);
+  font-size: var(--font-base-size-ltr);
+  color: rgb(var(--font-color));
+}
+
+body {
+  font-family: var(--content-font-ltr);
+  font-size: var(--font-base-size-ltr);
+  color: rgb(var(--font-color));
+  background-color: rgb(var(--background-color));
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 0px 0px, 0px 0px, 0px 0px;
+  background-image: radial-gradient(15vw 20vw at 90vw 5vh, rgba(var(--theme-main-color), 0.3) 0%, rgba(var(--background-color), 0) 100%), radial-gradient(12vw 22vw at 75vw 7vh, rgba(var(--theme-main-color), 0.16) 0%, rgba(var(--background-color), 0) 100%), radial-gradient(15vw 20vw at 77vw calc(100% - 5vh), rgba(var(--theme-main-color), 0.14) 0%, rgba(var(--background-color), 0) 100%), radial-gradient(12vw 22vw at 65vw calc(100% - 7vh), rgba(var(--theme-main-color), 0.1) 0%, rgba(var(--background-color), 0) 100%);
+}
+
+.navbar-brand .logo {
+  font-family: var(--head-font-ltr);
+  font-weight: 900;
+  color: rgb(var(--theme-main-color));
+  font-size: 2.5rem;
+  filter: drop-shadow(-0.4rem 0.4rem 0px rgba(var(--theme-main-color), 0.25)) contrast(1) brightness(1);
+  text-shadow: -0.2rem 0.2rem rgba(var(--theme-main-color), 0.5);
+  transition: 0.3s;
+}
+.navbar-brand .logo:hover {
+  color: rgb(var(--theme-main-color));
+  filter: drop-shadow(-0.2rem 0.2rem 0px rgba(var(--theme-main-color), 0.25)) contrast(1.3) brightness(1.3);
+  transition: 0.5s;
+}
+
+.post-card-wraper {
   border-radius: 16px;
-  background-color: white;
+  background-color: rgb(var(--post-card-bg-color));
   padding: 8px;
 }
 .post-card-wraper .post-card-title {
+  font-family: var(--head-font-ltr);
   font-size: 1.5rem;
-  font-weight: bold;
+  line-height: 1.2;
+  font-weight: 500;
   text-decoration: none;
   color: black;
   display: block;
@@ -20,12 +66,8 @@
   text-align: justify;
 }
 .post-card-wraper .post-card-read-more-btn {
-  color: #521E93;
+  color: rgb(var(--theme-main-color));
   text-decoration: none;
   margin-top: 10px;
   display: block;
-}
-
-body {
-  background-color: #F8F8F8;
 }

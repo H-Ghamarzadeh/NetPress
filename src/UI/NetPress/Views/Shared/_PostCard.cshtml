@@ -3,12 +3,14 @@
 <div class="col">
     <div class="post-card-wraper">
         <img class="post-card-img" src="@Model.PostPictures.OrderBy(p=> p.DisplayOrder).FirstOrDefault().Picture.Url" />
-        <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug" class="post-card-title">@Model.PostTitle</a>
-        <div class="post-card-excerpt">
-            @Model.PostExcerpt
+        <div class="m-2">
+            <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug" class="post-card-title">@Model.PostTitle</a>
+            <div class="post-card-excerpt">
+                @Model.PostExcerpt
+            </div>
+            <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug" class="post-card-read-more-btn">
+                Read More <i class="fa-regular fa-circle-right"></i>
+            </a>
         </div>
-        <a asp-controller="Blog" asp-action="Post" asp-route-id="@Model.Id" asp-route-slug="@Model.PostSlug" class="post-card-read-more-btn">
-            Read More <i class="fa-regular fa-circle-right"></i>
-        </a>
     </div>
 </div>
