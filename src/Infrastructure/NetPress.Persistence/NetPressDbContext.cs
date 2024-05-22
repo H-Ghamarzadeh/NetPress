@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetPress.Domain.Entities;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NetPress.Persistence
 {
-    public class NetPressDbContext : DbContext
+    public class NetPressDbContext : IdentityDbContext
     {
 
         public NetPressDbContext(DbContextOptions<NetPressDbContext> options)

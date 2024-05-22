@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetPress.Application.Contracts.Persistence;
@@ -8,7 +9,8 @@ namespace NetPress.Persistence
 {
     public static class ServiceRegistrar
     {
-        public static void AddNetPressPersistenceServices(this IServiceCollection services, ConfigurationManager configurationManager)
+        public static void AddNetPressPersistenceServices(this IServiceCollection services,
+            ConfigurationManager configurationManager, IdentityBuilder identityBuilder)
         {
             services.AddDbContext<NetPressDbContext>(cfg =>
             {
@@ -22,6 +24,7 @@ namespace NetPress.Persistence
                         break;
                 }
             });
+            identityBuilder.AddEntityFrameworkStores<NetPressDbContext>();
 
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITaxonomyRepository, TaxonomyRepository>();

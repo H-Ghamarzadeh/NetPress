@@ -4,6 +4,7 @@ using NetPress.Application.Contracts.Persistence;
 using NetPress.Persistence;
 using System.Reflection;
 using HGO.Hub.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using NetPress.Application.Actions;
 using NetPress.Infrastructure;
@@ -23,7 +24,13 @@ builder.Services.AddHgoHub(options =>
     options.RegisterServicesFromAssemblies(assemblies.ToArray());
 });
 
-builder.Services.AddNetPressPersistenceServices(builder.Configuration);
+var identityBuilder = builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+builder.Services.AddAuthentication().AddCookie(o =>
+{
+    o.Cookie.SameSite = SameSiteMode.Strict;
+});
+
+builder.Services.AddNetPressPersistenceServices(builder.Configuration, identityBuilder);
 builder.Services.AddNetPressInfrastructureServices(builder.Configuration);
 
 builder.Services.AddResponseCompression(options =>
@@ -61,13 +68,20 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAntiforgery();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapRazorPages();
 //Map Admin Area
 app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    name: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}",
+    defaults: new {area = "Admin"});
+//Map Admin Area
+app.MapControllerRoute(
+    name: "Account",
+    pattern: "Account/{controller=Home}/{action=Index}/{id?}",
+    defaults: new { area = "Account" });
 //Map Front End
 app.MapControllerRoute(
     name: "default",

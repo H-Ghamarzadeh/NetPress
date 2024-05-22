@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    
     <Compile Remove="wwwroot\Fonts\**" />
     <Content Remove="wwwroot\Fonts\**" />
-    <EmbeddedResource Remove="wwwroot\Fonts\**" />
+    <EmbeddedResource Remove="wwwroot\Fonts\**" />      
     <None Remove="wwwroot\Fonts\**" />
   </ItemGroup>
 
@@ -19,11 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="HGO.Hub" Version="1.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -42,8 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Account\ViewModels\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

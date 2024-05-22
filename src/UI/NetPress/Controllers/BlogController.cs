@@ -1,4 +1,5 @@
 ﻿using HGO.Hub.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NetPress.Application.Exceptions;
 using NetPress.Application.Features;
@@ -26,6 +27,7 @@ namespace NetPress.Controllers
             return View(model);
         }
 
+        [Authorize] 
         [Route("blog/{id:int?}")]
         [Route("blog/{slug?}")]
         [Route("blog/{id:int?}/{slug?}")]
@@ -33,7 +35,6 @@ namespace NetPress.Controllers
         {
             if (id == null && string.IsNullOrWhiteSpace(slug))
             {
-                RouteData.Values.Clear();
                 return RedirectToAction("Index", "Blog");
             }
 
