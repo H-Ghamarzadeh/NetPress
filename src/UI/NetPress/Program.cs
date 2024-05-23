@@ -7,6 +7,7 @@ using HGO.Hub.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using NetPress.Application.Actions;
+using NetPress.Domain.Entities;
 using NetPress.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,7 @@ builder.Services.AddHgoHub(options =>
     options.RegisterServicesFromAssemblies(assemblies.ToArray());
 });
 
-var identityBuilder = builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+var identityBuilder = builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
 builder.Services.AddAuthentication().AddCookie(o =>
 {
     o.Cookie.SameSite = SameSiteMode.Strict;
@@ -76,11 +77,11 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "Admin",
     pattern: "Admin/{controller=Home}/{action=Index}/{id?}",
-    defaults: new {area = "Admin"});
+    defaults: new {area = "Admin" });
 //Map Admin Area
 app.MapControllerRoute(
     name: "Account",
-    pattern: "Account/{controller=Home}/{action=Index}/{id?}",
+    pattern: "Account/{controller=Identity}/{action=Login}/{id?}",
     defaults: new { area = "Account" });
 //Map Front End
 app.MapControllerRoute(

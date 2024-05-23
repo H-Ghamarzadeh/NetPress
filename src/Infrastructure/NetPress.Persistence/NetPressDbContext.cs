@@ -80,5 +80,6 @@ namespace NetPress.Persistence
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentMetaData> CommentMetaData { get; set; }
         public DbSet<Option> Options { get; set; }
+        public DbSet<UserMetaData> UserMetaData { get; set; }
     }
 }

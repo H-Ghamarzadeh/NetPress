@@ -70,5 +70,8 @@ namespace NetPress.UI.Framework
         /// Get value of the specified key from the current http request form data as string
         /// </summary>
         public string? Form(string key) => Form<string>(key);
+
+        public HttpRequest Request => ViewContext.HttpContext.Request;
+        public HttpResponse Response => ViewContext.HttpContext.Response;
     }
 }
